@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json.Linq;
@@ -10,7 +10,7 @@ namespace SaveSystem
     {
         private static SaveManager instance;
         public const string GAME_SAVE_FILE_NAME = "saved_game.save";
-        [Tooltip("Нужно ли сохраняться при выходе из игры?")]
+        [Tooltip("РќСѓР¶РЅРѕ Р»Рё СЃРѕР·СЂР°РЅСЏС‚СЃСЏ РїСЂРё РІС‹С…РѕРґРµ РёР· РёРіСЂС‹?")]
         public bool saveOnQuit = false;
         private SaveLoadStrategy saveLoadStrategy;
 
