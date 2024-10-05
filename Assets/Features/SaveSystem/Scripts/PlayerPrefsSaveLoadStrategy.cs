@@ -1,13 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿
 using UnityEngine;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
     /// Сохраняет в и читает из PlayerPrefs
     /// </summary>
-    public class PlayerPrefsSaveLoadStrategy: SaveLoadStrategy
+    internal class PlayerPrefsSaveLoadStrategy: SaveLoadStrategy
     {
         private string prefName;
 

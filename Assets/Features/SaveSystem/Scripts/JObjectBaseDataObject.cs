@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
     /// Объект данных, которые храняться как JSON.
@@ -73,7 +73,7 @@ namespace SaveSystem
             return result;
         }
     }
-    public class JObjectDataObjectCreator: BaseDataObjectCreator
+    internal class JObjectDataObjectCreator: BaseDataObjectCreator
     {
         public override BaseDataObject Create() => new JObjectBaseDataObject(null);
     }

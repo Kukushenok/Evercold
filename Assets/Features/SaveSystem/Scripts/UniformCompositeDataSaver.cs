@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
     /// Абстрактный универсальный менеджер данных сохранения, который представляет собой композицию

@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using SaveSystem;
+using Features.SaveSystem;
 
 namespace Game.SaveSystem
 {
     /// <summary>
-    /// Пример менеджера сохранения. Можно реализовать в нём интерфейс (по типу public int GetCount()),
-    /// и какой-то скрипт будет обращаться к этому менеджеру, имея ссылку на ScriptableObject!
+    /// РџСЂРёРјРµСЂ РјРµРЅРµРґР¶РµСЂР° СЃРѕС…СЂР°РЅРµРЅРёСЏ. РњРѕР¶РЅРѕ СЂРµР°Р»РёР·РѕРІР°С‚СЊ РІ РЅС‘Рј РёРЅС‚РµСЂС„РµР№СЃ (РїРѕ С‚РёРїСѓ public int GetCount()),
+    /// Рё РєР°РєРѕР№-С‚Рѕ СЃРєСЂРёРїС‚ Р±СѓРґРµС‚ РѕР±СЂР°С‰Р°С‚СЊСЃСЏ Рє СЌС‚РѕРјСѓ РјРµРЅРµРґР¶РµСЂСѓ, РёРјРµСЏ СЃСЃС‹Р»РєСѓ РЅР° ScriptableObject!
     /// </summary>
     [CreateAssetMenu(fileName = "Example", menuName = "Game/SaveSystem/Example")]
     public class BasicSaveDataManager : BaseDataSaver
@@ -20,6 +18,7 @@ namespace Game.SaveSystem
         {
             _count = values.TryGetProperty(nameof(_count), 0);
             _data = values.TryGetProperty(nameof(_data), _defaultData); 
+            
         }
 
         public override void Save(IPropertySetter values)

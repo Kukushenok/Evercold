@@ -1,10 +1,9 @@
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
-    /// Базовый менеджер сохранений, представляющий композицию менеджеров сохранений 
+    /// Р‘Р°Р·РѕРІС‹Р№ РјРµРЅРµРґР¶РµСЂ СЃРѕС…СЂР°РЅРµРЅРёР№, РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‰РёР№ РєРѕРјРїРѕР·РёС†РёСЋ РјРµРЅРµРґР¶РµСЂРѕРІ СЃРѕС…СЂР°РЅРµРЅРёР№ 
     /// </summary>
     [CreateAssetMenu(fileName = "Composite Data Saver",menuName ="Game/SaveSystem/Composite")]
     public class BaseCompositeDataSaver : UniformCompositeDataSaver<BaseDataSaver>

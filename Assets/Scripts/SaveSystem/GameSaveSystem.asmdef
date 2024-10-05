@@ -1,7 +1,9 @@
 {
-    "name": "SaveSystem",
-    "rootNamespace": "SaveSystem",
-    "references": [],
+    "name": "GameSaveSystem",
+    "rootNamespace": "Game.SaveSystem",
+    "references": [
+        "SaveSystem"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

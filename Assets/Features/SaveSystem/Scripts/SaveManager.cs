@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
-
-namespace SaveSystem
+﻿using UnityEngine;
+namespace Features.SaveSystem
 {
     /// <summary>
     /// Класс, который загружает и сохраняет данные.

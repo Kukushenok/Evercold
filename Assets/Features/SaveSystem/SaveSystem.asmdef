@@ -1,9 +1,7 @@
 {
-    "name": "ConcreteSaveSystem",
-    "rootNamespace": "",
-    "references": [
-        "SaveSystem"
-    ],
+    "name": "SaveSystem",
+    "rootNamespace": "Features.SaveSystem",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

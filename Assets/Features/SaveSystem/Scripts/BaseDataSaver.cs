@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
-    /// Абстрактный менеджер данных сохранения
+    /// РђР±СЃС‚СЂР°РєС‚РЅС‹Р№ РјРµРЅРµРґР¶РµСЂ РґР°РЅРЅС‹С… СЃРѕС…СЂР°РЅРµРЅРёСЏ
     /// </summary>
     public abstract class BaseDataSaver : ScriptableObject
     {

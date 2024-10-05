@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace SaveSystem
+﻿namespace Features.SaveSystem
 {
     /// <summary>
     /// Интерфейс, показывающий возможность сохранения через тип T
     /// Используется для SaveLoadStrategy.
     /// </summary>
-    public interface ILoadableAndSerializableAs<T>
+    internal interface ILoadableAndSerializableAs<T>
     {
         public T SerializeAs();
         public void LoadFrom(T obj);
@@ -14,7 +12,7 @@ namespace SaveSystem
     /// <summary>
     /// Стратегия загрузки-сохранения объекта.
     /// </summary>
-    public abstract class SaveLoadStrategy
+    internal abstract class SaveLoadStrategy
     {
         /// <summary>
         /// Загрузить объект. Загрузка МОДИФИЦИРУЕТ obj.

@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.IO;
 using UnityEngine;
 
-namespace SaveSystem
+namespace Features.SaveSystem
 {
     /// <summary>
     /// Сохраняет в и читает из файла в Appications.persistentDataPath
@@ -12,7 +9,7 @@ namespace SaveSystem
     /// Это сделано по простой причине - чтобы игрок не положил туда ТБайт каких то данных
     /// и функция ReadToEnd не читала это полностью.
     /// </summary>
-    public class PersistentPathSaveLoadStrategy: SaveLoadStrategy
+    internal class PersistentPathSaveLoadStrategy: SaveLoadStrategy
     {
         private const long SAVE_MAX_SIZE = 5 * 1024; // 5 KB
         private string _saveDir;

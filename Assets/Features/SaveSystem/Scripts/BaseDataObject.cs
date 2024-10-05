@@ -1,4 +1,4 @@
-﻿namespace SaveSystem
+﻿namespace Features.SaveSystem
 {
     /// <summary>
     /// Интерфейс чтения данных. Используется BaseDataSaver для загрузки значений
@@ -19,7 +19,7 @@
     /// <summary>
     /// Абстрактный создатель данных. Создаёт пустые данные.
     /// </summary>
-    public abstract class BaseDataObjectCreator
+    internal abstract class BaseDataObjectCreator
     {
         public abstract BaseDataObject Create();
     }
