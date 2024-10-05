@@ -6,82 +6,51 @@ using UnityEngine;
 
 namespace SaveSystem
 {
-    public class SaveManager : BaseCompositeDataSaver
+    /// <summary>
+    /// Класс, который загружает и сохраняет данные.
+    /// В будущем, скорее всего будет одним из singleton-ов.
+    /// </summary>
+    public class SaveManager : MonoBehaviour
     {
-        private static SaveManager instance;
         public const string GAME_SAVE_FILE_NAME = "saved_game.save";
-        [Tooltip("Нужно ли созранятся при выходе из игры?")]
-        public bool saveOnQuit = false;
-        private SaveLoadStrategy saveLoadStrategy;
+        [Tooltip("Нужно ли сохранятся при выходе из игры?")]
+        public bool SaveOnQuit = false;
+        [Tooltip("Главный менеджер сохранений")]
+        [SerializeField] private BaseDataSaver _dataSaver;
+        private SaveLoadStrategy _saveLoadStrategy;
+
+        private BaseDataObjectCreator _dataObjectCreator;
+
 
         private void Awake()
         {
-            // I guess I should use a factroy buuut the butt.
+            // TODO: вынести это в отдельный класс Settings, который и выдаёт по методам нужные стратегии/креаторы.
 #if UNITY_WEBGL
-            saveLoadStrategy = new PlayerPrefsSaveLoadStrategy(GAME_SAVE_FILE_NAME);
+            _saveLoadStrategy = new PlayerPrefsSaveLoadStrategy(GAME_SAVE_FILE_NAME);
 #else
-            saveLoadStrategy = new PersistentPathSaveLoadStrategy(GAME_SAVE_FILE_NAME);
+            _saveLoadStrategy = new PersistentPathSaveLoadStrategy(GAME_SAVE_FILE_NAME);
 #endif
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-                LoadData();
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            _dataObjectCreator = new JObjectDataObjectCreator();
+            LoadData();
         }
         private void SaveData()
         {
-            JObject saveData = Save();
-            saveLoadStrategy.Save(saveData);
+            BaseDataObject obj = _dataObjectCreator.Create();
+            _dataSaver.Save(obj);
+            _saveLoadStrategy.Save(obj);
         }
         private void LoadData()
         {
-            JObject saveData = saveLoadStrategy.Load();
-            Load(saveData);
+            BaseDataObject obj = _dataObjectCreator.Create();
+            _saveLoadStrategy.Load(obj);
+            _dataSaver.Load(obj);
         }
         private void OnApplicationQuit()
         {
-            if (saveOnQuit)
+            if (SaveOnQuit)
             {
                 SaveData();
             }
-        }
-        public static BaseDataSaver GetDataSaver(string resolutionPath)
-        {
-            BaseDataSaver something = instance;
-            string[] parts = resolutionPath.Split('/');
-            for (int i = 0; i < parts.Length && something != null; i++)
-            {
-                something = something.GetChild(parts[i]);
-            }
-            return something;
-        
-        }
-        public override string GetIdentifier()
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public static class SaveManagerDelusion
-    {
-        public static T SafelyGet<T>(this JObject obj, string key, T def = default)
-        {
-            T result = def;
-            if (obj == null) return result;
-
-            if (obj.TryGetValue(key, out JToken token))
-            {
-                try
-                {
-                    result = token.ToObject<T>();
-                }
-                finally { }
-            }
-            return result;
         }
     }
 }

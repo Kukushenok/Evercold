@@ -1,37 +1,70 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Сохраняет в и читает из файла в Appications.persistentDataPath
+    /// Максимальный размер файла для чтения - 5 КБ.
+    /// Это сделано по простой причине - чтобы игрок не положил туда ТБайт каких то данных
+    /// и функция ReadToEnd не читала это полностью.
+    /// </summary>
     public class PersistentPathSaveLoadStrategy: SaveLoadStrategy
     {
-        private string saveDir;
+        private const long SAVE_MAX_SIZE = 5 * 1024; // 5 KB
+        private string _saveDir;
 
         public PersistentPathSaveLoadStrategy(string saveFileName)
         {
-            saveDir = Application.persistentDataPath + "/" + saveFileName;
+            _saveDir = Application.persistentDataPath + "/" + saveFileName;
         }
-        public override void Save(JObject obj)
+        public override void Save(object obj)
         {
-            using (StreamWriter file = File.CreateText(saveDir))
-            using (JsonTextWriter writer = new JsonTextWriter(file))
+            if (obj is ILoadableAndSerializableAs<string> stringable)
             {
-                obj.WriteTo(writer);
+                using (StreamWriter file = File.CreateText(_saveDir))
+                {
+                    file.WriteLine(stringable.SerializeAs());
+                }
+            }
+            else
+            {
+                Debug.LogError("No type supportance :(");
             }
         }
-        public override JObject Load()
+        public override void Load(object obj)
         {
-            JObject saveData = new JObject();
-            if (File.Exists(saveDir))
+            if (obj is ILoadableAndSerializableAs<string> stringable)
+            {
+                ReadFromFile(_saveDir, stringable);
+            }
+            else
+            {
+                Debug.LogError("No type supportance :(");
+            }
+        }
+        void ReadFromFile(string fileDir, ILoadableAndSerializableAs<string> obj)
+        {
+            if (File.Exists(fileDir))
             {
                 try
                 {
-                    using (StreamReader file = File.OpenText(saveDir))
-                    using (JsonTextReader reader = new JsonTextReader(file))
+                    FileInfo info = new FileInfo(fileDir);
+                    if (info.Length > SAVE_MAX_SIZE)
                     {
-                        saveData = (JObject)JToken.ReadFrom(reader);
+                        Debug.LogWarning("Save data has large size. Ignoring. If you disagree, change SAVE_MAX_SIZE");
+                    }
+                    else
+                    {
+                        string fileContent;
+                        using (StreamReader file = File.OpenText(fileDir))
+                        {
+                            fileContent = file.ReadToEnd();
+                        }
+                        obj.LoadFrom(fileContent);
                     }
                 }
                 catch
@@ -39,7 +72,6 @@ namespace SaveSystem
                     Debug.LogError("An exception occured while reading the file.");
                 }
             }
-            return saveData;
         }
     }
 }

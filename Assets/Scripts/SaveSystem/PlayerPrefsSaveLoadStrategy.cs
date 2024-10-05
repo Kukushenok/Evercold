@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Сохраняет в и читает из PlayerPrefs
+    /// </summary>
     public class PlayerPrefsSaveLoadStrategy: SaveLoadStrategy
     {
         private string prefName;
@@ -12,30 +15,46 @@ namespace SaveSystem
         {
             prefName = playerPrefName;
         }
-        public override JObject Load()
+        public override void Load(object obj)
         {
-            string res = PlayerPrefs.GetString(prefName, string.Empty);
-            JObject saveData = new JObject();
-            try
+            if (obj is ILoadableAndSerializableAs<string> stringable)
             {
-                saveData = JObject.Parse(res);
+                try
+                {
+                    stringable.LoadFrom(PlayerPrefs.GetString(prefName, string.Empty));
+                }
+                catch(PlayerPrefsException)
+                {
+                    LogPPrefsError();
+                }
             }
-            catch
+            else
             {
-                Debug.LogError("An exception occured while reading the prefs.");
+                Debug.LogError("No type supportance :(");
             }
-            return saveData;
         }
-        public override void Save(JObject obj)
+        public override void Save(object obj)
         {
-            try
+            if (obj is ILoadableAndSerializableAs<string> stringable)
             {
-                PlayerPrefs.SetString(prefName, obj.ToString(Formatting.None));
+                try
+                {
+                    PlayerPrefs.SetString(prefName, stringable.SerializeAs());
+                }
+                catch (PlayerPrefsException)
+                {
+                    LogPPrefsError();
+                }
             }
-            catch(PlayerPrefsException)
+            else
             {
-                Debug.LogError("Uh oh! Player prefs has exceeded its size... Sorry!");
+                Debug.LogError("No type supportance :(");
             }
+
+        }
+        void LogPPrefsError()
+        {
+            Debug.LogError("Something went wrong");
         }
     }
 }

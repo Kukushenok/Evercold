@@ -1,14 +1,15 @@
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace SaveSystem
 {
-    public abstract class BaseDataSaver : MonoBehaviour
+    /// <summary>
+    /// Абстрактный менеджер данных сохранения
+    /// </summary>
+    public abstract class BaseDataSaver : ScriptableObject
     {
         public abstract string GetIdentifier();
-        public virtual BaseDataSaver GetChild(string identifier) => null;
-        public abstract void Load(JObject values);
+        public abstract void Load(IPropertyGetter values);
 
-        public abstract JObject Save();
+        public abstract void Save(IPropertySetter values);
     }
 }

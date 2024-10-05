@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SaveSystem;
-using Newtonsoft.Json.Linq;
 
 namespace Game.SaveSystem
 {
+    /// <summary>
+    /// Пример менеджера сохранения. Можно реализовать в нём интерфейс (по типу public int GetCount()),
+    /// и какой-то скрипт будет обращаться к этому менеджеру, имея ссылку на ScriptableObject!
+    /// </summary>
+    [CreateAssetMenu(fileName = "Example", menuName = "Game/SaveSystem/Example")]
     public class BasicSaveDataManager : BaseDataSaver
     {
-        [SerializeField] private string _identifier;
         [SerializeField] private int _count;
-
-        public override string GetIdentifier()
+        [SerializeField] private string _data = "Privet!";
+        [SerializeField] private string _defaultData = "Hello";
+        public override string GetIdentifier() => name;
+        public override void Load(IPropertyGetter values)
         {
-            return _identifier;
+            _count = values.TryGetProperty(nameof(_count), 0);
+            _data = values.TryGetProperty(nameof(_data), _defaultData); 
         }
 
-        public override void Load(JObject values)
+        public override void Save(IPropertySetter values)
         {
-            _count = values.SafelyGet<int>(nameof(_count), _count);
+            values.SetProperty(nameof(_count), _count);
+            values.SetProperty(nameof(_data), _data);
         }
-        public override JObject Save()
-        {
-            JObject obj = new JObject();
-            obj[nameof(_count)] = _count;
-            return obj;
-        }
-        
     }
 }
