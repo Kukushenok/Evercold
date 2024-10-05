@@ -8,11 +8,11 @@ namespace Features.SaveSystem
     /// </summary>
     internal class PlayerPrefsSaveLoadStrategy: SaveLoadStrategy
     {
-        private string prefName;
+        private string _prefName;
 
         public PlayerPrefsSaveLoadStrategy(string playerPrefName)
         {
-            prefName = playerPrefName;
+            _prefName = playerPrefName;
         }
         public override void Load(object obj)
         {
@@ -20,7 +20,7 @@ namespace Features.SaveSystem
             {
                 try
                 {
-                    stringable.LoadFrom(PlayerPrefs.GetString(prefName, string.Empty));
+                    stringable.LoadFrom(PlayerPrefs.GetString(_prefName, string.Empty));
                 }
                 catch(PlayerPrefsException)
                 {
@@ -38,7 +38,7 @@ namespace Features.SaveSystem
             {
                 try
                 {
-                    PlayerPrefs.SetString(prefName, stringable.SerializeAs());
+                    PlayerPrefs.SetString(_prefName, stringable.SerializeAs());
                 }
                 catch (PlayerPrefsException)
                 {
