@@ -1080,8 +1080,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1221282310}
+  _playerFeatures:
+  - rid: 2885190604225511428
+  - rid: 2885190604225511429
+  - rid: 2885190604225511430
   jumpHeight: 1.5
   gravity: -9.81
+  references:
+    version: 2
+    RefIds:
+    - rid: 2885190604225511428
+      type: {class: CoyoteTimeJumpLocomotionFeature, ns: , asm: MyFeature}
+      data: 
+    - rid: 2885190604225511429
+      type: {class: JumpLocomotionFeature, ns: , asm: MyFeature}
+      data: 
+    - rid: 2885190604225511430
+      type: {class: MoveLocomotionFeature, ns: , asm: MyFeature}
+      data:
+        speed: 5
 --- !u!1 &1652367779
 GameObject:
   m_ObjectHideFlags: 0

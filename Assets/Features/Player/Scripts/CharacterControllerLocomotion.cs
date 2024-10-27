@@ -1,7 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class PlayerLocomotionFeature
+public interface IPlayerLocomotionFeature
+{
+    public void LocomotionFixedUpdate(BasePlayerLocomotion loc);
+    public void LocomotionUpdate(BasePlayerLocomotion loc);
+}
+public abstract class PlayerLocomotionFeature: IPlayerLocomotionFeature
 {
     public abstract void LocomotionFixedUpdate(BasePlayerLocomotion loc);
     public abstract void LocomotionUpdate(BasePlayerLocomotion loc);
@@ -16,7 +21,7 @@ public abstract class BasePlayerLocomotion : MonoBehaviour
     public abstract void Jump();
 
     [SerializeReference, SubclassSelector]
-    private List<PlayerLocomotionFeature> _playerFeatures = new List<PlayerLocomotionFeature>();
+    private List<IPlayerLocomotionFeature> _playerFeatures = new List<IPlayerLocomotionFeature>();
 
     protected virtual void OnLocomotionFixedUpdate()
     {
