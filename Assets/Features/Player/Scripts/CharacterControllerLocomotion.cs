@@ -23,29 +23,26 @@ public abstract class BasePlayerLocomotion : MonoBehaviour
     [SerializeReference, SubclassSelector]
     private List<IPlayerLocomotionFeature> _playerFeatures = new List<IPlayerLocomotionFeature>();
 
-    protected virtual void OnLocomotionFixedUpdate()
+    protected abstract void OnLocomotionUpdate();
+    protected abstract void OnLocomotionFixedUpdate();
+
+    private void FixedUpdate()
     {
+      
         foreach (var feature in _playerFeatures)
         {
             feature.LocomotionFixedUpdate(this);
         }
-    }
-
-    protected virtual void OnLocomotionUpdate()
-    {
-        foreach (var feature in _playerFeatures)
-        {
-            feature.LocomotionUpdate(this);
-        }
-    }
-
-    private void FixedUpdate()
-    {
         OnLocomotionFixedUpdate();
     }
 
     private void Update()
     {
+       
+        foreach (var feature in _playerFeatures)
+        {
+            feature.LocomotionUpdate(this);
+        }
         OnLocomotionUpdate();
     }
 }
@@ -58,14 +55,23 @@ public class CharacterControllerLocomotion : BasePlayerLocomotion
     public float jumpHeight = 1.5f;
     public float gravity = -9.81f;
 
+    private Vector3 cameraRotation;
     public override Vector3 DesiredDeltaPos { get; set; }
-    public override Vector3 CameraRotation { get; set; }
+   
+
+    public override Vector3 CameraRotation
+    {
+        get => cameraRotation;
+        set => cameraRotation = value;
+    }
 
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
 
-        // Настройка камеры от первого лица, если её нет в объекте игрока
+       
+
+        
         if (playerCamera == null)
         {
             playerCamera = Camera.main;
@@ -97,33 +103,36 @@ public class CharacterControllerLocomotion : BasePlayerLocomotion
 
         _velocity.y += gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
+
+
+        transform.rotation = Quaternion.Euler(0f, CameraRotation.y, 0f);
+
+
+       
+        
+            playerCamera.transform.localRotation = Quaternion.Euler(CameraRotation.x, 0f, 0f);
+
+            
+        
+    }
+
+    protected override void OnLocomotionFixedUpdate()
+    {
+       
     }
 }
 
-[System.Serializable]
-public class JumpLocomotionFeature : PlayerLocomotionFeature
-{
-    public override void LocomotionFixedUpdate(BasePlayerLocomotion loc) { }
 
-    public override void LocomotionUpdate(BasePlayerLocomotion loc)
-    {
-        if (CanJump(loc) && Input.GetButtonDown("Jump"))
-        {
-            loc.Jump();
-        }
-    }
-
-    protected virtual bool CanJump(BasePlayerLocomotion loc)
-    {
-        return ((CharacterControllerLocomotion)loc)._isGrounded;
-    }
-}
 
 [System.Serializable]
-public class CoyoteTimeJumpLocomotionFeature : JumpLocomotionFeature
+public class CoyoteTimeJumpLocomotionFeature : PlayerLocomotionFeature
 {
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+    public override void LocomotionFixedUpdate(BasePlayerLocomotion loc)
+    {
+        // Реализовать необходимую физику для прыжка при учете coyote time
+    }
 
     public override void LocomotionUpdate(BasePlayerLocomotion loc)
     {
@@ -142,12 +151,9 @@ public class CoyoteTimeJumpLocomotionFeature : JumpLocomotionFeature
             loc.Jump();
         }
     }
-
-    protected override bool CanJump(BasePlayerLocomotion loc)
-    {
-        return true;
-    }
 }
+    
+
 
 [System.Serializable]
 public class MoveLocomotionFeature : PlayerLocomotionFeature
@@ -170,6 +176,7 @@ public class CameraLocomotionFeature : PlayerLocomotionFeature
 {
     public float mouseSensitivity = 2f;
     private float verticalRotation = 0f;
+    private float horizontalRotation = 0f;
 
     public override void LocomotionFixedUpdate(BasePlayerLocomotion loc) { }
 
@@ -178,16 +185,11 @@ public class CameraLocomotionFeature : PlayerLocomotionFeature
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Вращение игрока по горизонтали
-        loc.transform.Rotate(Vector3.up * mouseX);
-
-        // Вращение камеры по вертикали
+        // Обновляем горизонтальный и вертикальный поворот
+        horizontalRotation += mouseX;
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-
-        if (loc.playerCamera != null)
-        {
-            loc.playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        }
+        // Обновляем CameraRotation в базовом классе
+        loc.CameraRotation = new Vector3(verticalRotation, horizontalRotation);
     }
 }

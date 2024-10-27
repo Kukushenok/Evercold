@@ -686,7 +686,7 @@ Transform:
   m_GameObject: {fileID: 1221282309}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.26199996, z: 0}
+  m_LocalPosition: {x: 0, y: 0.658, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1082,8 +1082,8 @@ MonoBehaviour:
   playerCamera: {fileID: 1221282310}
   _playerFeatures:
   - rid: 2885190604225511428
-  - rid: 2885190604225511429
-  - rid: 2885190604225511430
+  - rid: 2885190604225511432
+  - rid: 2885190604225511434
   jumpHeight: 1.5
   gravity: -9.81
   references:
@@ -1092,13 +1092,14 @@ MonoBehaviour:
     - rid: 2885190604225511428
       type: {class: CoyoteTimeJumpLocomotionFeature, ns: , asm: MyFeature}
       data: 
-    - rid: 2885190604225511429
-      type: {class: JumpLocomotionFeature, ns: , asm: MyFeature}
-      data: 
-    - rid: 2885190604225511430
+    - rid: 2885190604225511432
       type: {class: MoveLocomotionFeature, ns: , asm: MyFeature}
       data:
         speed: 5
+    - rid: 2885190604225511434
+      type: {class: CameraLocomotionFeature, ns: , asm: MyFeature}
+      data:
+        mouseSensitivity: 2
 --- !u!1 &1652367779
 GameObject:
   m_ObjectHideFlags: 0
