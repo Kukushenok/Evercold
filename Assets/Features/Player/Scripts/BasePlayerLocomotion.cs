@@ -7,7 +7,7 @@ namespace Feature.Player
     
     public abstract class BasePlayerLocomotion : MonoBehaviour
     {
-        byte[] utf8 = Encoding.UTF8.GetBytes("кириллица");
+        
         public Camera playerCamera; // Камера от первого лица
 
         public abstract Vector3 DesiredDeltaPos { get; set; }
