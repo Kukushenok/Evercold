@@ -14,34 +14,33 @@ namespace Feature.Enemy
     [RequireComponent(typeof(NavMeshAgent))]
     public class AIEnemyMovement : MonoBehaviour
     {
-        [SerializeField] private Transform _Player;
-        public Transform Player => _Player;
+        [SerializeField] private Transform _player;
+        public Transform player => _player;
 
         [Header("Distance Properties")]
-        [SerializeField] private float _DistanceToDetectPlayer;
-        [SerializeField] private float _PatrolDistance;
-        [SerializeField] private float _MaxDistanceToStartPoint;
+        [SerializeField] private float _distanceToDetectPlayer;
+        [SerializeField] private float _patrolDistance;
+        [SerializeField] private float _maxDistanceToStartPoint;
 
-        private Vector3 _StartPointPatrol;
-        private NavMeshAgent _NavMeshAgent;
-        private AIState _State;
-        private Timer _FindNewPositionTimer;
+        private Vector3 _startPointPatrol;
+        private NavMeshAgent _navMeshAgent;
+        private AIState _state;
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (_PatrolDistance > _MaxDistanceToStartPoint)
+            if (_patrolDistance > _maxDistanceToStartPoint)
             {
-                _MaxDistanceToStartPoint = _PatrolDistance;
+                _maxDistanceToStartPoint = _patrolDistance;
             }
         }
 #endif
 
         private void Start()
         {
-            _NavMeshAgent = GetComponent<NavMeshAgent>();
-            _StartPointPatrol = transform.position;
-            _State = AIState.Patrol;
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _startPointPatrol = transform.position;
+            _state = AIState.Patrol;
         }
 
         private void Update()
@@ -58,48 +57,48 @@ namespace Feature.Enemy
 
         private void CheckPlayerInVisibleArea()
         {
-            if (_Player != null)
+            if (_player != null)
             {
-                float distanceToPlayer = Vector3.Distance(transform.position, _Player.position);
-                if (distanceToPlayer < _DistanceToDetectPlayer && Vector3.Distance(transform.position, _StartPointPatrol) < _MaxDistanceToStartPoint)
+                float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
+                if (distanceToPlayer < _distanceToDetectPlayer && Vector3.Distance(transform.position, _startPointPatrol) < _maxDistanceToStartPoint)
                 {
-                    _State = AIState.Triggered;
+                    _state = AIState.Triggered;
                 }
             }
         }
 
         private void CheckAIOutRangeToStartPoint()
         {
-            float distanceToStartPoint = Vector3.Distance(transform.position, _StartPointPatrol);
-            if (distanceToStartPoint > _MaxDistanceToStartPoint)
+            float distanceToStartPoint = Vector3.Distance(transform.position, _startPointPatrol);
+            if (distanceToStartPoint > _maxDistanceToStartPoint)
             {
-                _State = AIState.Patrol;
+                _state = AIState.Patrol;
             }
 
-            if (_Player == null)
+            if (_player == null)
             {
-                _State = AIState.Patrol;
+                _state = AIState.Patrol;
             }
         }
 
         private void SetTargetPosition()
         {
-            if (_State == AIState.Triggered)
+            if (_state == AIState.Triggered)
             {
-                if (_Player != null)
+                if (_player != null)
                 {
-                    _NavMeshAgent.destination = _Player.position;
+                    _navMeshAgent.destination = _player.position;
                 }
             }
 
-            if (_State == AIState.Patrol)
+            if (_state == AIState.Patrol)
             {
-                if (Vector3.Distance(transform.position, _NavMeshAgent.destination) <= _NavMeshAgent.stoppingDistance)
+                if (Vector3.Distance(transform.position, _navMeshAgent.destination) <= _navMeshAgent.stoppingDistance)
                 {
-                    Vector3 newPoint = UnityEngine.Random.onUnitSphere * _PatrolDistance + _StartPointPatrol;
+                    Vector3 newPoint = UnityEngine.Random.onUnitSphere * _patrolDistance + _startPointPatrol;
                     newPoint.y = transform.position.y;
 
-                    _NavMeshAgent.destination = newPoint;
+                    _navMeshAgent.destination = newPoint;
                 }
             }
         }

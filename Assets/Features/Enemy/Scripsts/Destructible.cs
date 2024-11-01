@@ -13,25 +13,24 @@ namespace Feature.Enemy
         /// <summary>
         /// Объект игнорирует повреждения
         /// </summary>
-        [SerializeField] private bool _Indestructible;
-        public bool Indestructible => _Indestructible;
+        [SerializeField] private bool _indestructible;
+        public bool indestructible => _indestructible;
         /// <summary>
         /// Стартовое кол-во хитпоинтов
         /// </summary>
-        [SerializeField] private int _HitPoints;
-        public int MaxHitPoints => _HitPoints;
+        [SerializeField] private int _hitPoints;
+        public int maxHitPoints => _hitPoints;
         /// <summary>
         /// Текущее значение хитпоинтов
         /// </summary>
-        private int _CurrentHitpoints;
-        public int CurrentHitpoints => _CurrentHitpoints;
+        public int _currentHitpoints { get; private set; }
 
-        [SerializeField] private UnityEvent _EventOnDeath;
-        public UnityEvent EventOnDeath => _EventOnDeath;
+        [SerializeField] private UnityEvent _eventOnDeath;
+        public UnityEvent eventOnDeath => _eventOnDeath;
 
         protected virtual void Start()
         {
-            _CurrentHitpoints = _HitPoints;
+            _currentHitpoints = _hitPoints;
         }
 
         protected virtual void Update()
@@ -44,11 +43,11 @@ namespace Feature.Enemy
         /// <param name="damage"> Урон, наносимый объекту</param>
         public void ApplyDamage(int damage)
         {
-            if (_Indestructible) return;
+            if (_indestructible) return;
 
-            _CurrentHitpoints -= damage;
+            _currentHitpoints -= damage;
 
-            if (_CurrentHitpoints <= 0)
+            if (_currentHitpoints <= 0)
                 OnDeath();
 
         }
@@ -59,7 +58,7 @@ namespace Feature.Enemy
         protected virtual void OnDeath()
         {
             Destroy(gameObject);
-            _EventOnDeath?.Invoke();
+            _eventOnDeath?.Invoke();
         }
     }
 }

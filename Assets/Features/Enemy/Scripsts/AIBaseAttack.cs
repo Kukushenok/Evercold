@@ -6,48 +6,39 @@ namespace Feature.Enemy
 {
     public class AIBaseAttack : MonoBehaviour
     {
-        [SerializeField] private int _Damage;
-        [SerializeField] private float _FireRate;
-        [SerializeField] private float _AttackDistance;
-        [SerializeField] private Destructible Target; //TODO Заменить Destructible на класс хп персонажа
+        [SerializeField] private int _damage;
+        [SerializeField] private float _fireRate;
+        [SerializeField] private float _attackDistance;
+        [SerializeField] private Destructible target; //TODO Заменить Destructible на класс хп персонажа
 
         private Timer _FireRateTimer;
 
         private void Start()
         {
-            InitTimers();
+            StartCoroutine(AttackCoroutine());
         }
 
-        private void Update()
+        public IEnumerator AttackCoroutine()
         {
-            Attack();
-            UpdateTimers();
-        }
-
-        private void Attack()
-        {
-            if (Target != null)
+            while (true)
             {
-                if (Vector3.Distance(Target.GetComponent<Transform>().position, transform.position) <= _AttackDistance)
+                if (target != null)
                 {
-                    if (_FireRateTimer.IsFinished == true)
+                    if (Vector3.Distance(target.GetComponent<Transform>().position, transform.position) <= _attackDistance)
                     {
-                        Target.ApplyDamage(_Damage); //TODO Заменить на функцию нанесения урона персонажу.
-
-                        _FireRateTimer.Start(_FireRate);
+                        target.ApplyDamage(_damage); //TODO Заменить на функцию нанесения урона персонажу.
+                        yield return new WaitForSeconds(_fireRate);
+                    }
+                    else
+                    {
+                        yield return new WaitForEndOfFrame();
                     }
                 }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                }
             }
-        }
-
-        private void InitTimers()
-        {
-            _FireRateTimer = new Timer(_FireRate);
-        }
-
-        private void UpdateTimers()
-        {
-            _FireRateTimer.RemoveTime(Time.deltaTime);
         }
     }
 }
