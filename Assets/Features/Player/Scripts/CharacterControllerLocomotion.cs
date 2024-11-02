@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 namespace Feature.Player
 {
-   
+   [RequireComponent(typeof(CharacterController))]
     public class CharacterControllerLocomotion : BasePlayerLocomotion
     {
         private CharacterController _controller;
         private Vector3 _velocity;
         protected internal bool _isGrounded;
-        public float jumpHeight = 1.5f;
-        public float gravity = -9.81f;
+        [SerializeField] private float jumpHeight = 1.5f;
+        [SerializeField] private float gravity = -9.81f;
 
         private Vector3 _cameraRotation;
-        private Camera _playercamera;
+        [SerializeField] private Camera playerCamera;
         public override Vector3 DesiredDeltaPos { get; set; }
 
         public override Vector3 CameraRotation
@@ -27,13 +27,11 @@ namespace Feature.Player
 
             if (playerCamera == null)
             {
-                playerCamera = _playercamera;
-                playerCamera.transform.SetParent(transform);
-                playerCamera.transform.localPosition = new Vector3(0, 1.6f, 0); // Позиция камеры на уровне головы
-                playerCamera.transform.localRotation = Quaternion.identity;
+                Debug.LogError("playerCamera is not setted in inspector");
             }
 
         }
+        
 
         public override void Jump()
         {
@@ -47,10 +45,11 @@ namespace Feature.Player
         {
             _isGrounded = _controller.isGrounded;
 
-            if (_isGrounded && _velocity.y < 0)
+           if (_isGrounded && _velocity.y < 0)
             {
                 _velocity.y = -2f;
             }
+            
 
             Vector3 move = DesiredDeltaPos;
             _controller.Move(move * Time.deltaTime);
@@ -65,7 +64,7 @@ namespace Feature.Player
         }
         protected override void OnLocomotionFixedUpdate()
         {
-
+            
         }
     }
 

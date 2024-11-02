@@ -6,8 +6,6 @@ namespace Feature.Player
 {
    
     [System.Serializable]
-
-    //перемещение персонажа
     public class MoveLocomotionFeature : PlayerLocomotionFeature
     {
         public float speed = 5f;

@@ -7,9 +7,6 @@ namespace Feature.Player
     
     public abstract class BasePlayerLocomotion : MonoBehaviour
     {
-        
-        public Camera playerCamera; // Камера от первого лица
-
         public abstract Vector3 DesiredDeltaPos { get; set; }
         public abstract Vector3 CameraRotation { get; set; }
         public abstract void Jump();

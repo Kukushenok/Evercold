@@ -4,8 +4,6 @@ using UnityEngine;
 using System.Text;
 namespace Feature.Player
 {
-    
-    //Реализация прыжка
     [System.Serializable]
     public class CoyoteTimeJumpLocomotionFeature : PlayerLocomotionFeature
     {
