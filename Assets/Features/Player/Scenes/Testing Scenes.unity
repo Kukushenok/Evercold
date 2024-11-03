@@ -1026,16 +1026,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5962346137257713683, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: m_SkinWidth
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962346137257713683, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: m_MinMoveDistance
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6466037733751326197, guid: b999fdbc2cd0d5947a34583198944ba0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1085,46 +1075,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: _playerFeatures.Array.data[0]
-      value: 2885190604225511435
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: _playerFeatures.Array.data[1]
-      value: 2885190604225511436
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: _playerFeatures.Array.data[2]
-      value: 2885190604225511437
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: managedReferences[2885190604225511435]
-      value: MyFeature Feature.Player.CameraLocomotionFeature
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: managedReferences[2885190604225511436]
-      value: MyFeature Feature.Player.CoyoteTimeJumpLocomotionFeature
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: managedReferences[2885190604225511437]
-      value: MyFeature Feature.Player.MoveLocomotionFeature
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: managedReferences[2885190604225511437].speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6952108942839072879, guid: b999fdbc2cd0d5947a34583198944ba0,
-        type: 3}
-      propertyPath: managedReferences[2885190604225511435].mouseSensitivity
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8068815979434908252, guid: b999fdbc2cd0d5947a34583198944ba0,
         type: 3}

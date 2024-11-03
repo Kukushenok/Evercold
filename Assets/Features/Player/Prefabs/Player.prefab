@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 6466037733751326197}
   - component: {fileID: 5677451053048450137}
   - component: {fileID: 8717617607253502785}
-  - component: {fileID: 4324092868134612048}
   - component: {fileID: 1564115538098960415}
   - component: {fileID: 5962346137257713683}
   - component: {fileID: 6952108942839072879}
@@ -225,29 +224,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4324092868134612048
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8068815979434908252}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1564115538098960415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -299,7 +275,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6952108942839072879
 MonoBehaviour:
@@ -313,24 +289,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37472dcf9b9a4844cb81ef911c6ea87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1903369436291690242}
   _playerFeatures:
-  - rid: 2885190604225511428
-  - rid: 2885190604225511432
-  - rid: 2885190604225511434
+  - rid: 8122709298411208704
+  - rid: 8122709298411208705
+  - rid: 8122709298411208706
   jumpHeight: 1.5
   gravity: -9.81
+  playerCamera: {fileID: 1903369436291690242}
   references:
     version: 2
     RefIds:
-    - rid: 2885190604225511428
-      type: {class: CoyoteTimeJumpLocomotionFeature, ns: , asm: MyFeature}
-      data: 
-    - rid: 2885190604225511432
-      type: {class: MoveLocomotionFeature, ns: , asm: MyFeature}
-      data:
-        speed: 5
-    - rid: 2885190604225511434
-      type: {class: CameraLocomotionFeature, ns: , asm: MyFeature}
+    - rid: 8122709298411208704
+      type: {class: CameraLocomotionFeature, ns: Feature.Player, asm: MyFeature}
       data:
         mouseSensitivity: 2
+    - rid: 8122709298411208705
+      type: {class: CoyoteTimeJumpLocomotionFeature, ns: Feature.Player, asm: MyFeature}
+      data: 
+    - rid: 8122709298411208706
+      type: {class: MoveLocomotionFeature, ns: Feature.Player, asm: MyFeature}
+      data:
+        speed: 5
