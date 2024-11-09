@@ -9,11 +9,11 @@ namespace Feature.Player
         private CharacterController _controller;
         private Vector3 _velocity;
         protected internal bool _isGrounded;
-        [SerializeField] private float jumpHeight = 1.5f;
-        [SerializeField] private float gravity = -9.81f;
+        [SerializeField] private float _jumpHeight = 1.5f;
+        [SerializeField] private float _gravity = -9.81f;
 
         private Vector3 _cameraRotation;
-        [SerializeField] private Camera playerCamera;
+        [SerializeField] private Camera _playerCamera;
         public override Vector3 DesiredDeltaPos { get; set; }
 
         public override Vector3 CameraRotation
@@ -25,7 +25,7 @@ namespace Feature.Player
         {
             _controller = GetComponent<CharacterController>();
 
-            if (playerCamera == null)
+            if (_playerCamera == null)
             {
                 Debug.LogError("playerCamera is not setted in inspector");
             }
@@ -37,7 +37,7 @@ namespace Feature.Player
         {
             if (_isGrounded)
             {
-                _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             }
         }
 
@@ -54,12 +54,12 @@ namespace Feature.Player
             Vector3 move = DesiredDeltaPos;
             _controller.Move(move * Time.deltaTime);
 
-            _velocity.y += gravity * Time.deltaTime;
+            _velocity.y += _gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
 
             transform.rotation = Quaternion.Euler(0f, CameraRotation.y, 0f);
 
-            playerCamera.transform.localRotation = Quaternion.Euler(CameraRotation.x, 0f, 0f);
+            _playerCamera.transform.localRotation = Quaternion.Euler(CameraRotation.x, 0f, 0f);
 
         }
         protected override void OnLocomotionFixedUpdate()

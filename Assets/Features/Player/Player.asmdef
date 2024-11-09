@@ -1,6 +1,6 @@
 {
-    "name": "MyFeature",
-    "rootNamespace": "",
+    "name": "Player",
+    "rootNamespace": "Feature.Player",
     "references": [
         "GUID:49b49c76ee64f6b41bf28ef951cb0e50"
     ],

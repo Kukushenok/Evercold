@@ -7,8 +7,8 @@ namespace Feature.Player
     [System.Serializable]
     public class CoyoteTimeJumpLocomotionFeature : PlayerLocomotionFeature
     {
-        private float coyoteTime = 0.2f;
-        private float coyoteTimeCounter;
+        private float _coyoteTime = 0.2f;
+        private float _coyoteTimeCounter;
         public override void LocomotionFixedUpdate(BasePlayerLocomotion loc)
         {
             
@@ -19,14 +19,14 @@ namespace Feature.Player
             CharacterControllerLocomotion locomotion = (CharacterControllerLocomotion)loc;
             if (locomotion._isGrounded)
             {
-                coyoteTimeCounter = coyoteTime;
+                _coyoteTimeCounter = _coyoteTime;
             }
             else
             {
-                coyoteTimeCounter -= Time.deltaTime;
+                _coyoteTimeCounter -= Time.deltaTime;
             }
 
-            if (coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
+            if (_coyoteTimeCounter > 0 && Input.GetButtonDown("Jump"))
             {
                 loc.Jump();
             }

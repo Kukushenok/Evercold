@@ -290,23 +290,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerFeatures:
-  - rid: 8122709298411208704
-  - rid: 8122709298411208705
-  - rid: 8122709298411208706
-  jumpHeight: 1.5
-  gravity: -9.81
-  playerCamera: {fileID: 1903369436291690242}
+  - rid: 7754889815266164740
+  - rid: 7754889815266164741
+  - rid: 7754889815266164742
+  _jumpHeight: 1.5
+  _gravity: -9.81
+  _playerCamera: {fileID: 1903369436291690242}
   references:
     version: 2
     RefIds:
-    - rid: 8122709298411208704
-      type: {class: CameraLocomotionFeature, ns: Feature.Player, asm: MyFeature}
+    - rid: 7754889815266164740
+      type: {class: CameraLocomotionFeature, ns: Feature.Player, asm: Player}
       data:
         mouseSensitivity: 2
-    - rid: 8122709298411208705
-      type: {class: CoyoteTimeJumpLocomotionFeature, ns: Feature.Player, asm: MyFeature}
+    - rid: 7754889815266164741
+      type: {class: CoyoteTimeJumpLocomotionFeature, ns: Feature.Player, asm: Player}
       data: 
-    - rid: 8122709298411208706
-      type: {class: MoveLocomotionFeature, ns: Feature.Player, asm: MyFeature}
+    - rid: 7754889815266164742
+      type: {class: MoveLocomotionFeature, ns: Feature.Player, asm: Player}
       data:
-        speed: 5
+        _speed: 5
