@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: CustomPostProcessRenderFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  _fShader: {fileID: -6465566751694194690, guid: 08877f71851ba5f49bfb26e4f04f4f9e,
+  _blindUpdateShader: {fileID: -6465566751694194690, guid: 08877f71851ba5f49bfb26e4f04f4f9e,
+    type: 3}
+  _blindApplyShader: {fileID: -6465566751694194690, guid: 5bd429250b0244f439a4cc9ade0d4ad0,
     type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
