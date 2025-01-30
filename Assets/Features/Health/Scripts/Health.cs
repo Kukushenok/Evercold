@@ -8,8 +8,8 @@ namespace Feature.Health
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] public float MaxHealth { private set; get; }
-        [SerializeField] public float CurrentHealth { private set; get; }
+        [field: SerializeField] public float MaxHealth { private set; get; }
+        [field: SerializeField] public float CurrentHealth { private set; get; }
 
         public UnityEvent OnTakeDamage;
         public UnityEvent OnHeal;
