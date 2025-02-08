@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf431da93b00e7f46aae6e8a3a257794, type: 3}
   m_Name: CustomPostProcessRenderFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   _blindUpdateShader: {fileID: -6465566751694194690, guid: 08877f71851ba5f49bfb26e4f04f4f9e,
     type: 3}
   _blindApplyShader: {fileID: -6465566751694194690, guid: 5bd429250b0244f439a4cc9ade0d4ad0,
