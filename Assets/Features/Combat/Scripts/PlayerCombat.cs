@@ -9,28 +9,42 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private int _attackDamage = 10;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Transform _attackPoint;
+
+    [Header("animation logic")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private string _attackAnimationName;
+    [SerializeField] private string _leftPunchAnimationName;
+    [SerializeField] private string _rightPunchAnimationName; // animation names are also trigger names
+    private bool _isRightPunch = true;
+    private bool _canDoAction = true;
+    
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_canDoAction && Input.GetMouseButtonDown(0))
         {
-            Attack();
+            PlayAnimation();
+
+        }
+
+        if (_canDoAction && Input.GetKeyDown(KeyCode.E))
+        {   
+            
         }
     }
 
+    
+
     private void Attack()
     {
-        _animator.Play(_attackAnimationName);
         Collider[] hitEnemies = Physics.OverlapSphere(_attackPoint.position, _attackRange, _enemyLayer); // finding all enemies
         foreach (Collider enemy in hitEnemies)
         {
-            if (enemy.TryGetComponent(out Health enemyHealth))
+            if (enemy.TryGetComponent(out IDamageable enemyHealth))
             {
-                enemyHealth.GetDamage(_attackDamage);
+                enemyHealth.TakeDamage(_attackDamage);
             }
         }
+        _canDoAction = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -39,5 +53,12 @@ public class PlayerCombat : MonoBehaviour
             return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
+    }
+
+    private void PlayAnimation()
+    { 
+        if (_isRightPunch=!_isRightPunch) { _animator.SetTrigger(_rightPunchAnimationName); }
+        else {_animator.SetTrigger(_leftPunchAnimationName); }
+        _canDoAction = false;
     }
 }
