@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour
+public class PickUpItem : MonoBehaviour
 {
-    public readonly HandType _handType = HandType.Right; // this means what hand will character use to hold this Item 
+    [field: SerializeField] public HandType _handType {private set; get;} = HandType.Right; // this means what hand will character use to hold this Item 
 
     [SerializeField] private Vector3 _positionOffset;
     [SerializeField] private Vector3 rotationOffset;
@@ -20,10 +20,8 @@ public class PickupItem : MonoBehaviour
 
     public void PickUp(Transform hand)
     {
-        transform.localPosition = _positionOffset;
-        transform.localRotation = Quaternion.Euler(rotationOffset);
-
-        transform.SetParent(hand);
+        
+        transform.SetParent(hand, worldPositionStays: true);
         _isPickedUp = true;
 
         if (_rigidbody != null)
@@ -39,24 +37,9 @@ public class PickupItem : MonoBehaviour
         transform.SetParent(null);
         _isPickedUp = false;
 
-        // Включаем физику, чтобы предмет снова мог падать
         if (_rigidbody != null)
         {
             _rigidbody.isKinematic = false;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // Проверяем, что игрок находится рядом с предметом и нажимает клавишу для поднятия
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
-        {
-            // Ищем объект руки у игрока
-            Transform playerHand = other.transform.Find("Hand"); // Убедитесь, что объект "Hand" существует
-            if (playerHand != null)
-            {
-                PickUp(playerHand);
-            }
         }
     }
 }
