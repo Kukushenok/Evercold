@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coyoteTime: 0.2
+  _mineConfig: {fileID: 11400000, guid: 4cf7ff16b9b21df45a910a5d6f81a018, type: 2}
 --- !u!1 &341553475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1009,6 @@ GameObject:
   - component: {fileID: 1125274803}
   - component: {fileID: 1125274802}
   - component: {fileID: 1125274801}
-  - component: {fileID: 1125274800}
   - component: {fileID: 1125274799}
   - component: {fileID: 1125274798}
   - component: {fileID: 1125274804}
@@ -1066,27 +1066,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1.0000001, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &1125274800
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125274797}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1125274801
 MeshRenderer:
@@ -1322,6 +1301,7 @@ MonoBehaviour:
   _animator: {fileID: 1361756667}
   _leftPunchAnimationName: LeftPunch
   _rightPunchAnimationName: RightPunch
+  _forwardHitAnimationName: ForwardHit
 --- !u!1 &1396861964
 GameObject:
   m_ObjectHideFlags: 0

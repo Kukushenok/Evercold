@@ -12,6 +12,7 @@ namespace Feature.Player
         private void Construct(List<IPlayerLocomotionFeature> features){
             _playerFeatures = features;
         }
+        
         public abstract Vector3 DesiredDeltaPos { get; set; }
         public abstract Vector3 CameraRotation { get; set; }
         public abstract void Jump();

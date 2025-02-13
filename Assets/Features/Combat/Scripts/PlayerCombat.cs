@@ -19,12 +19,15 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform _pickUpPoint;
     [SerializeField] private Transform _leftHandTransform;
     [SerializeField] private Transform _rightHandTransform;
+    private PickUpItem _weapon = null;
+    private PickUpItem _throwable = null;
 
 
     [Header("animation logic")]
     [SerializeField] private Animator _animator;
     [SerializeField] private string _leftPunchAnimationName;
     [SerializeField] private string _rightPunchAnimationName; // animation names are also trigger names
+    [SerializeField] private string _forwardHitAnimationName;
     private bool _isRightPunch = true;
     private bool _canDoAction = true;
 
@@ -43,6 +46,10 @@ public class PlayerCombat : MonoBehaviour
         {   
             TryPickUp();
         }
+
+        if (_weapon != null && Input.GetKeyDown(KeyCode.Q)){
+            DropWeapon();
+        }
     }
 
     private void TryPickUp() {
@@ -57,16 +64,22 @@ public class PlayerCombat : MonoBehaviour
                     _leftHandObject.SetActive(false);
                     break;
                 }
-                if (pickUpItem._handType == HandType.Right)
+                if (pickUpItem._handType == HandType.Right && _weapon == null)
                 {   
-                    
                     pickUpItem.PickUp(_rightHandTransform);
                     _rightHandObject.SetActive(false);
+                    _weapon = pickUpItem;
                     break;
                 }
 
             }
         }
+    }
+
+    private void DropWeapon() {
+        _weapon.Drop();
+        _weapon = null;
+        _rightHandObject.SetActive(true);
     }
 
     private void Attack()
@@ -91,14 +104,13 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void PlayAttackAnimation()
-    { 
+    {   
+        if (_weapon != null) {
+            _animator.SetTrigger(_forwardHitAnimationName);
+            return;
+        }
         if (_isRightPunch=!_isRightPunch) { _animator.SetTrigger(_rightPunchAnimationName); }
         else {_animator.SetTrigger(_leftPunchAnimationName); }
         _canDoAction = false;
-    }
-
-    private void PlayLeftHandAnimation() 
-    {
-        
     }
 }
