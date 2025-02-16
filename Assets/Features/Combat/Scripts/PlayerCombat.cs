@@ -1,15 +1,25 @@
 using Feature.Health;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [System.Serializable]
+    public class AttackSettings {
+        [field: SerializeField] public float AttackRange {get; private set;}
+        [field: SerializeField] public float AttackDamage {get; private set;}
+        [field: SerializeField] public LayerMask EnemyLayer {get; private set;}
+        [field: SerializeField] public float PickUpRange {get; private set;}
+        [field: SerializeField] public LayerMask PickUpLayer {get; private set;}
+    }
     [SerializeField] private GameObject _leftHandObject;
     [SerializeField] private GameObject _rightHandObject;
     [Header("attack params")]
     [SerializeField] private float _attackRange = 1.5f;
-    [SerializeField] private int _attackDamage = 10;
+    [SerializeField] private float _attackDamage = 10;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Transform _attackPoint;
 
@@ -32,6 +42,16 @@ public class PlayerCombat : MonoBehaviour
     private bool _canDoAction = true;
 
     
+
+    [Inject]
+    public void Construct(AttackSettings settings) {
+        _attackRange = settings.AttackRange;
+        _attackDamage = settings.AttackDamage;
+        _enemyLayer = settings.EnemyLayer;
+        _pickUpRange = settings.PickUpRange;
+        _pickUpLayer = settings.PickUpLayer;
+        
+    }
     
 
     private void Update()
@@ -82,7 +102,7 @@ public class PlayerCombat : MonoBehaviour
         _rightHandObject.SetActive(true);
     }
 
-    private void Attack()
+    protected void Attack()
     {
         Collider[] hitEnemies = Physics.OverlapSphere(_attackPoint.position, _attackRange, _enemyLayer);
         foreach (Collider enemy in hitEnemies)

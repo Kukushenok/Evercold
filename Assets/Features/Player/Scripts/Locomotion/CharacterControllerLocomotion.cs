@@ -8,7 +8,7 @@ namespace Feature.Player
     public class CharacterControllerLocomotion : BasePlayerLocomotion
     {
         [System.Serializable]
-        public class Settings{
+        public class JumpSettings{
             [field: SerializeField] public float JumpHeight {get; private set;}
             [field: SerializeField] public float Gravity {get; private set;}
         }
@@ -24,7 +24,7 @@ namespace Feature.Player
         [SerializeField] private Camera _playerCamera;
         
         [Inject]
-        public void Construct(Settings settings) {
+        public void Construct(JumpSettings settings) {
             _gravity = settings.Gravity;
             _jumpHeight = settings.JumpHeight;
         }

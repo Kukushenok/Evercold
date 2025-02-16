@@ -18,3 +18,10 @@ MonoBehaviour:
     <Gravity>k__BackingField: -9.81
   <MovementSpeed>k__BackingField: 5
   <MouseSensitivity>k__BackingField: 2
+  <CombatSettings>k__BackingField:
+    <AttackRange>k__BackingField: 1.5
+    <AttackDamage>k__BackingField: 1
+    <PickUpRange>k__BackingField: 1.5
+    <PickUpLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4294967295
