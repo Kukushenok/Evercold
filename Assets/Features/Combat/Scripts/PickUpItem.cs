@@ -1,50 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PickUpItem : MonoBehaviour
+namespace Feature.Player
 {
-    [field: SerializeField] public HandType _handType {private set; get;} = HandType.Right; // this means what hand will character use to hold this Item 
-
-    [SerializeField] private Vector3 _positionOffset;
-    [SerializeField] private Vector3 rotationOffset;
-    
-
-    private Rigidbody _rigidbody;
-    private bool _isPickedUp = false;
-
-    void Start()
+    // [RequireComponent(typeof(Rigidbody))]
+    public class PickUpItem : MonoBehaviour
     {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+        [field: SerializeField] public HandType _handType { private set; get; } = HandType.Right; // this means what hand will character use to hold this Item 
 
-    public void PickUp(Transform hand)
-    {
-        
-        transform.SetParent(hand, worldPositionStays: true);
-        _isPickedUp = true;
+        [SerializeField] private Vector3 _positionOffset;
+        [SerializeField] private Vector3 rotationOffset;
 
-        if (_rigidbody != null)
+
+        private Rigidbody _rigidbody;
+        // private bool _isPickedUp = false;
+
+        void Awake()
         {
-            _rigidbody.isKinematic = true;
+            _rigidbody = GetComponent<Rigidbody>();
         }
-        transform.localPosition = _positionOffset;
-        transform.localRotation = Quaternion.Euler(rotationOffset);
-    }
 
-    public void Drop()
-    {
-        transform.SetParent(null);
-        _isPickedUp = false;
-
-        if (_rigidbody != null)
+        public void PickUp(Transform hand)
         {
-            _rigidbody.isKinematic = false;
+            transform.SetParent(hand, worldPositionStays: true);
+            // _isPickedUp = true;
+
+            if (_rigidbody != null)
+            {
+                _rigidbody.isKinematic = true;
+            }
+
+            transform.localPosition = _positionOffset;
+            transform.localRotation = Quaternion.Euler(rotationOffset);
+        }
+
+        public void Drop()
+        {
+            transform.SetParent(null);
+            // _isPickedUp = false;
+
+            if (_rigidbody != null)
+            {
+                _rigidbody.isKinematic = false;
+            }
         }
     }
-}
-public enum HandType
-{
-    Left,
-    Right
+    public enum HandType
+    {
+        Left,
+        Right
+    }
 }

@@ -1,6 +1,6 @@
 {
     "name": "combat",
-    "rootNamespace": "",
+    "rootNamespace": "Feature.Combat",
     "references": [
         "GUID:de454a8866b930444a599290def46f77"
     ],
