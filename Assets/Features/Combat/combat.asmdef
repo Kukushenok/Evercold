@@ -1,10 +1,8 @@
 {
-    "name": "Player",
-    "rootNamespace": "Feature.Player",
+    "name": "combat",
+    "rootNamespace": "Feature.Combat",
     "references": [
-        "GUID:49b49c76ee64f6b41bf28ef951cb0e50",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:ce422776d4073f349bfeee231986c088"
+        "GUID:de454a8866b930444a599290def46f77"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using Zenject;
 namespace Feature.Player
 {
     
     public abstract class BasePlayerLocomotion : MonoBehaviour
     {
+        [Inject]
+        private void Construct(List<IPlayerLocomotionFeature> features){
+            _playerFeatures = features;
+        }
+        
         public abstract Vector3 DesiredDeltaPos { get; set; }
         public abstract Vector3 CameraRotation { get; set; }
         public abstract void Jump();
 
-        [SerializeReference, SubclassSelector]
         private List<IPlayerLocomotionFeature> _playerFeatures = new List<IPlayerLocomotionFeature>();
 
         protected abstract void OnLocomotionUpdate();

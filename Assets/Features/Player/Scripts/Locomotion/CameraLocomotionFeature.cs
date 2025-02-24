@@ -9,17 +9,23 @@ namespace Feature.Player
     [System.Serializable]
     public class CameraLocomotionFeature : PlayerLocomotionFeature
     {
-        public float mouseSensitivity = 2f;
+        public float _mouseSensitivity = 2f;
         private float _verticalRotation = 0f;
         private float _horizontalRotation = 0f;
+        private PlayerInput _playerInput;
+
+        public CameraLocomotionFeature(float mouseSensitivity, PlayerInput playerInput) {
+            _mouseSensitivity = mouseSensitivity;
+            _playerInput = playerInput;
+        }
 
 
         public override void LocomotionFixedUpdate(BasePlayerLocomotion loc) { }
 
         public override void LocomotionUpdate(BasePlayerLocomotion loc)
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+            float mouseX = _playerInput.MouseMovementX * _mouseSensitivity;
+            float mouseY = _playerInput.MouseMovementY * _mouseSensitivity;
 
             // Updating horizontal and vertical rotation
             _horizontalRotation += mouseX;

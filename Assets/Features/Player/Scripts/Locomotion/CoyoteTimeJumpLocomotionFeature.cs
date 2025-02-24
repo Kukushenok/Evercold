@@ -8,7 +8,13 @@ namespace Feature.Player
     public class CoyoteTimeJumpLocomotionFeature : PlayerLocomotionFeature
     {
         private float _coyoteTime = 0.2f;
-        private float _coyoteTimeCounter;
+        private float _coyoteTimeCounter = 0f;
+        private PlayerInput _playerInput;
+
+        public CoyoteTimeJumpLocomotionFeature(float coyoteTime, PlayerInput playerInput) {
+            _coyoteTime = coyoteTime; 
+            _playerInput = playerInput;
+        }
         public override void LocomotionFixedUpdate(BasePlayerLocomotion loc)
         {
             

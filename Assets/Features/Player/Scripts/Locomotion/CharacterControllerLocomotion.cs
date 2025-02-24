@@ -1,19 +1,33 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Text;
+using Zenject;
 namespace Feature.Player
 {
    [RequireComponent(typeof(CharacterController))]
     public class CharacterControllerLocomotion : BasePlayerLocomotion
     {
+        [System.Serializable]
+        public class JumpSettings{
+            [field: SerializeField] public float JumpHeight {get; private set;}
+            [field: SerializeField] public float Gravity {get; private set;}
+        }
+
         private CharacterController _controller;
         private Vector3 _velocity;
         protected internal bool _isGrounded;
+        
         [SerializeField] private float _jumpHeight = 1.5f;
         [SerializeField] private float _gravity = -9.81f;
 
         private Vector3 _cameraRotation;
         [SerializeField] private Camera _playerCamera;
+        
+        [Inject]
+        public void Construct(JumpSettings settings) {
+            _gravity = settings.Gravity;
+            _jumpHeight = settings.JumpHeight;
+        }
         public override Vector3 DesiredDeltaPos { get; set; }
 
         public override Vector3 CameraRotation

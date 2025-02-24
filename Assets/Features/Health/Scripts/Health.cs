@@ -6,16 +6,16 @@ using UnityEngine.Events;
 
 namespace Feature.Health
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, IDamageable
     {
-        [SerializeField] public float MaxHealth { private set; get; }
-        [SerializeField] public float CurrentHealth { private set; get; }
+        [field: SerializeField] public float MaxHealth { private set; get; }
+        [field: SerializeField] public float CurrentHealth { private set; get; }
 
         public UnityEvent OnTakeDamage;
         public UnityEvent OnHeal;
         public UnityEvent OnDie;
 
-        public void GetDamage(float dmg)
+        public void TakeDamage(float dmg)
         {
             if (CurrentHealth == 0) { return; }
             if (dmg < 0) Debug.LogError("Can't take damage, damage must be > 0");
@@ -34,5 +34,10 @@ namespace Feature.Health
             CurrentHealth += value;
             if (CurrentHealth >= MaxHealth) CurrentHealth = MaxHealth;
         }
+    }
+
+    public interface IDamageable
+    {
+        void TakeDamage(float dmg);
     }
 }
