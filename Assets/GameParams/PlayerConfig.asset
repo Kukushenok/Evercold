@@ -21,6 +21,9 @@ MonoBehaviour:
   <CombatSettings>k__BackingField:
     <AttackRange>k__BackingField: 1.5
     <AttackDamage>k__BackingField: 1
+    <EnemyLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4294967295
     <PickUpRange>k__BackingField: 1.5
     <PickUpLayer>k__BackingField:
       serializedVersion: 2

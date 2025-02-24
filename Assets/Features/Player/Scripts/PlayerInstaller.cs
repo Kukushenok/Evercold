@@ -11,13 +11,13 @@ namespace Feature.Player
         public override void InstallBindings()
         {
             //base.InstallBindings(); // todo
+            
             Container.Bind<PlayerInput>().AsSingle();
             Container.Bind<IPlayerLocomotionFeature>().To<MoveLocomotionFeature>().AsCached().WithArguments(_mineConfig.MovementSpeed);
             Container.Bind<IPlayerLocomotionFeature>().To<CoyoteTimeJumpLocomotionFeature>().AsCached().WithArguments(_mineConfig.CoyoteTime);
             Container.Bind<IPlayerLocomotionFeature>().To<CameraLocomotionFeature>().AsCached().WithArguments(_mineConfig.MouseSensitivity);
             Container.Bind<CharacterControllerLocomotion.JumpSettings>().FromInstance(_mineConfig.LocomotionSettings);
             Container.Bind<PlayerCombat.AttackSettings>().FromInstance(_mineConfig.CombatSettings);
-            //Container.Bind<MonoBehaviour>()
             
         }
     }

@@ -1,4 +1,5 @@
 using Feature.Health;
+using Feature.Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
         [field: SerializeField] public float PickUpRange {get; private set;}
         [field: SerializeField] public LayerMask PickUpLayer {get; private set;}
     }
+    private PlayerInput _playerInput;
     [SerializeField] private GameObject _leftHandObject;
     [SerializeField] private GameObject _rightHandObject;
     [Header("attack params")]
@@ -38,19 +40,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private string _leftPunchAnimationName;
     [SerializeField] private string _rightPunchAnimationName; // animation names are also trigger names
     [SerializeField] private string _forwardHitAnimationName;
+    [SerializeField] private string _leftHitAnimationName;
+    [SerializeField] private string _rightHitAnimationName;
     private bool _isRightPunch = true;
     private bool _canDoAction = true;
 
     
 
     [Inject]
-    public void Construct(AttackSettings settings) {
+    public void Construct(AttackSettings settings, PlayerInput playerInput) {
         _attackRange = settings.AttackRange;
         _attackDamage = settings.AttackDamage;
         _enemyLayer = settings.EnemyLayer;
         _pickUpRange = settings.PickUpRange;
         _pickUpLayer = settings.PickUpLayer;
-        
+        _playerInput = playerInput;
     }
     
 
@@ -59,7 +63,6 @@ public class PlayerCombat : MonoBehaviour
         if (_canDoAction && Input.GetMouseButtonDown(0))
         {
             PlayAttackAnimation();
-
         }
 
         if (_canDoAction && Input.GetKeyDown(KeyCode.E))
@@ -112,6 +115,10 @@ public class PlayerCombat : MonoBehaviour
                 enemyHealth.TakeDamage(_attackDamage);
             }
         }
+        
+    }
+
+    protected void ResetAction() {
         _canDoAction = true;
     }
 
@@ -126,7 +133,11 @@ public class PlayerCombat : MonoBehaviour
     private void PlayAttackAnimation()
     {   
         if (_weapon != null) {
-            _animator.SetTrigger(_forwardHitAnimationName);
+            string animationName = _forwardHitAnimationName;
+            if (_playerInput.MovementX>0) animationName = _rightHitAnimationName;
+            else if (_playerInput.MovementX<0) animationName = _leftHitAnimationName;
+            _animator.SetTrigger(animationName);
+            _canDoAction = false;
             return;
         }
         if (_isRightPunch=!_isRightPunch) { _animator.SetTrigger(_rightPunchAnimationName); }
