@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-namespace Feature.MainMenu
+namespace Features.MainMenu
 {
-    interface IMainMenu
+    interface IGameManager
     {
-        void StartButton(Scene LoadScene);
+        void StartButton(string LoadScene);
 
         void ExitButton();
     }
