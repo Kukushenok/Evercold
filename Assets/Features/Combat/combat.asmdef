@@ -1,0 +1,16 @@
+{
+    "name": "combat",
+    "rootNamespace": "Feature.Combat",
+    "references": [
+        "GUID:de454a8866b930444a599290def46f77"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
