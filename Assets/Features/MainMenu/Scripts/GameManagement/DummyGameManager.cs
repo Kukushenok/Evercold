@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-namespace Features.MainMenu
+namespace Feature.MainMenu
 {
     public class DummyGameManager : IGameManager
     {

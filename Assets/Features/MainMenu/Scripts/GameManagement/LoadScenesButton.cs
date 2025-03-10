@@ -1,11 +1,11 @@
-using Features.MainMenu;
+using Feature.MainMenu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Features.MainMenu
+namespace Feature.MainMenu
 {
     public class LoadScenesButton : MonoBehaviour
     {

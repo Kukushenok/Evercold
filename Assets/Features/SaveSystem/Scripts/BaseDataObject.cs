@@ -1,4 +1,4 @@
-﻿namespace Features.SaveSystem
+﻿namespace Feature.SaveSystem
 {
     /// <summary>
     /// Интерфейс чтения данных. Используется BaseDataSaver для загрузки значений

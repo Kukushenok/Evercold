@@ -1,8 +1,9 @@
 {
-    "name": "MainMenu",
-    "rootNamespace": "Features.MainMenu",
+    "name": "PlayerLocomotion",
+    "rootNamespace": "Feature.Player ",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:91a8401a9b6beb04d9df2a7648ae8378"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
