@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Features.SaveSystem
+namespace Feature.SaveSystem
 {
     /// <summary>
     /// Базовый менеджер сохранений, представляющий композицию менеджеров сохранений 

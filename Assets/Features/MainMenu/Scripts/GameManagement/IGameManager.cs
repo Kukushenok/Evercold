@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-namespace Features.MainMenu
+namespace Feature.MainMenu
 {
     interface IGameManager
     {

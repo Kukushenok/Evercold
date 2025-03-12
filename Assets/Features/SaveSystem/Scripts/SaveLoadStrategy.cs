@@ -1,4 +1,4 @@
-﻿namespace Features.SaveSystem
+﻿namespace Feature.SaveSystem
 {
     /// <summary>
     /// Интерфейс, показывающий возможность сохранения через тип T

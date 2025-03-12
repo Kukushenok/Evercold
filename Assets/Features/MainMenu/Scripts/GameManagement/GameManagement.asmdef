@@ -1,8 +1,8 @@
 {
-    "name": "combat",
-    "rootNamespace": "Feature.Combat",
+    "name": "GameManagement",
+    "rootNamespace": "",
     "references": [
-        "GUID:de454a8866b930444a599290def46f77"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

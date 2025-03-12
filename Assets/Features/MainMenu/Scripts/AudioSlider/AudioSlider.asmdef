@@ -1,6 +1,6 @@
 {
-    "name": "SaveSystem",
-    "rootNamespace": "Feature.SaveSystem",
+    "name": "AudioSlider",
+    "rootNamespace": "Feature.MainMenu",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

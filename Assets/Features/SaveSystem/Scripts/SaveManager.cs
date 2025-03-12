@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace Features.SaveSystem
+namespace Feature.SaveSystem
 {
     /// <summary>
     /// Класс, который загружает и сохраняет данные.

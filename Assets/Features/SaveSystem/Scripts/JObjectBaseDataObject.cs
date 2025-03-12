@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Features.SaveSystem
+namespace Feature.SaveSystem
 {
     /// <summary>
     /// Объект данных, которые храняться как JSON.
