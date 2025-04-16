@@ -2,10 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker
+namespace Feature.Player
 {
-    bool collisionWithWalls = false;
-    bool onGround = false;
-    public bool IsOnGround() {return false;}
-    public bool IsCollidingWithWalls() {return false;}
+    public interface IPlayerWallChecker
+    {
+        bool IsCollidingWithWalls();
+    }
+
+
+    public interface IPlayerGroundChecker
+    {
+        bool IsOnGround();
+    }
+    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker
+    {
+        bool collisionWithWalls = false;
+        bool onGround = false;
+        public bool IsOnGround() { return false; }
+        public bool IsCollidingWithWalls() { return false; }
+    }
 }
+

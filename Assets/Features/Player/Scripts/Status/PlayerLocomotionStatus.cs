@@ -2,7 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLocomotionStatus
+namespace Feature.Player
 {
-    
+    public interface IPlayerLocomotionStatus
+    {
+        bool IsSliding();
+        bool IsJumping();
+        bool IsDashing();
+    }
+
+    public class PlayerLocomotionStatus
+    {
+
+    }
 }
