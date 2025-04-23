@@ -16,6 +16,7 @@ namespace Feature.Player
         public float HighestFallingVelocity = 0.1f;
 
         [field: SerializeField, Space, Header("Move Params")] public float MovementSpeed { get; private set; }
+        [field: SerializeField] public float MovementDrag = 1f;
         [field: SerializeField, Space, Header("Camera Params")] public float MouseSensitivity { get; private set; }
         [field: SerializeField, Space, Header("Wall Check Params"), Tooltip("example: colliding sphere radius")]
         public float WallCheckFigureSize = 1f;

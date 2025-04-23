@@ -38,18 +38,21 @@ namespace Feature.Player
         private Transform _cameraTransform;
         public Vector3 Velocity { get; set; }
         private CharacterController _controller;
+        private PlayerConfig _config;
 
-        public PlayerLocomotion(Transform playerTransform, Transform cameraTransform, CharacterController controller)
+        public PlayerLocomotion(Transform playerTransform, Transform cameraTransform, CharacterController controller, PlayerConfig config)
         {
             _cameraTransform = cameraTransform;
             _playerTransform = playerTransform;
             _controller = controller;
             Velocity = Vector3.zero;
+            _config = config; 
             
         }
 
         public void FixedUpdate() {
             _controller.Move(Velocity * Time.fixedDeltaTime);
+            Velocity = new Vector3(Mathf.Lerp(Velocity.x, 0, _config.MovementDrag * Time.fixedDeltaTime), Velocity.y, Mathf.Lerp(Velocity.z, 0, _config.MovementDrag * Time.fixedDeltaTime));
         }
     }
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
   LowestJumpingVelocity: 0.1
   HighestFallingVelocity: 0.1
   <MovementSpeed>k__BackingField: 10
+  MovementDrag: 10
   <MouseSensitivity>k__BackingField: 1000
   WallCheckFigureSize: 1
   LeftWallCheckDirection: {x: -1, y: 0, z: 0}
