@@ -9,7 +9,7 @@ namespace Feature.Player
     {
 
         public bool IsSliding() {return Input.GetButtonDown("Slide");}
-        public bool IsJumping() {return Input.GetButtonDown("Jump");}
+        public bool IsJumping() {return Input.GetAxis("Jump")>0;}
         public bool IsDashing() {return Input.GetButtonDown("Dash");}
         public float GetMouseMovementX() {return Input.GetAxis("Mouse X");}
         public float GetMouseMovementY() {return Input.GetAxis("Mouse Y");}

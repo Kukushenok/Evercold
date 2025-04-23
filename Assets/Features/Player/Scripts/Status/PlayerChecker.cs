@@ -18,8 +18,38 @@ namespace Feature.Player
     {
         bool collisionWithWalls = false;
         bool onGround = false;
-        public bool IsOnGround() { return false; }
-        public bool IsCollidingWithWalls() { return false; }
+        private PlayerConfig _config;
+        public PlayerChecker(PlayerConfig config) {
+            _config = config;
+        }
+        public bool IsOnGround() { 
+            return Physics.SphereCast(
+                transform.position,
+                _config.GroundCheckFigureSize,
+                Vector3.down,
+                out _, 
+                _config.CheckFigureShiftDistance,
+                _config.GroundLayerMask);
+         }
+        
+        public bool IsCollidingWithWalls() { 
+            if (Physics.SphereCast(
+                transform.position,
+                _config.WallCheckFigureSize,
+                _config.LeftWallCheckDirection,
+                out _,
+                _config.CheckFigureShiftDistance,
+                _config.WallLayerMask)) return true;
+            if (Physics.SphereCast(
+                transform.position,
+                _config.WallCheckFigureSize,
+                _config.RightWallCheckDirection,
+                out _,
+                _config.CheckFigureShiftDistance,
+                _config.WallLayerMask)) return true;
+            return false;
+        }
+
     }
 }
 

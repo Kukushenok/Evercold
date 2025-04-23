@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -10,25 +11,60 @@ namespace Feature.Player
         //[SerializeField] private PlayerConfig _mineConfig;
         [field: SerializeField] Transform _cameraTransform;
         private List<ILocomotionFeature> _locomotionFeatures;
+        [SerializeField] PlayerConfig _playerConfig;
         //ILocomotionData _locomotion;
 
         public override void InstallBindings()
         {
             Container
-                .Bind<ILocomotionData>()
-                .To<LocomotionData>()
+                .Bind<IPlayerLocomotion>()
+                .To<PlayerLocomotion>()
                 .AsSingle()
-                .WithArguments(_cameraTransform);
-
-            Container
-                .Bind<ILocomotionFeature>()
-                .To<JumpLocomotionFeature>()
-                .AsSingle();
+                .WithArguments(transform, _cameraTransform);
 
             Container
                 .BindInterfacesAndSelfTo<LocomotionUpdateManager>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container
+                .Bind<IMovementInput>()
+                .To<KeyboardPlayerInput>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container
+                .Bind<PlayerConfig>()
+                .FromInstance(_playerConfig)
+                .AsSingle();
+            
+            Container
+                .Bind<Rigidbody>()
+                .FromInstance(GetComponent<Rigidbody>())
+                .AsSingle();
+            
+            Container
+                .Bind<CharacterController>()
+                .FromInstance(GetComponent<CharacterController>())
+                .AsSingle();
+            
+            // locomotion features
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<JumpLocomotionFeature>()
+                .AsSingle();
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<GravityLocomotionFeature>()
+                .AsSingle();
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<MoveLocomotionFeature>()
+                .AsSingle();
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<CameraMoveLocomotionFeature>()
+                .AsSingle();
             
             
             
@@ -40,17 +76,5 @@ namespace Feature.Player
             //Container.Bind<PlayerCombat.AttackSettings>().FromInstance(_mineConfig.CombatSettings);
 
         }
-    }
-
-    [CreateAssetMenu(menuName = "Configs.PlayerConfig", fileName = "PlayerConfig")]
-    public class PlayerConfig : ScriptableObject
-    {
-        [field: SerializeField, Header("Jump Params")] public float CoyoteTime { get; private set; }
-        //[field: SerializeField] public CharacterControllerLocomotion.JumpSettings LocomotionSettings {get; private set;}
-
-        [field: SerializeField, Space, Header("Move Params")] public float MovementSpeed { get; private set; }
-        [field: SerializeField, Space, Header("Camera Params")] public float MouseSensitivity { get; private set; }
-
-        //[field: SerializeField, Space, Header("Attack Params")] public PlayerCombat.AttackSettings CombatSettings {get; private set;}
     }
 }
