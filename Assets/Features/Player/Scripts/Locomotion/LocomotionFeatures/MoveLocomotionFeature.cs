@@ -10,9 +10,10 @@ public class MoveLocomotionFeature : ILocomotionFeature
     [Inject] PlayerConfig config;
     public void OnFixedUpdate(IPlayerLocomotion loc) {
 
-        //Vector3 move = loc.PlayerTransform.right * _movementInput.GetHorizontalMovement()
-        //    + loc.PlayerTransform.forward * _movementInput.GetVerticalMovement();
-        //loc.Controller.Move(move.normalized * config.MovementSpeed * Time.deltaTime);
+        Vector3 move = Vector3.right * _movementInput.GetHorizontalMovement()
+            + Vector3.forward * _movementInput.GetVerticalMovement();
+        Quaternion rotation = Quaternion.Euler(0, loc.PlayerRotation.y, 0);
+        loc.Velocity += rotation * move;
 
     }
     

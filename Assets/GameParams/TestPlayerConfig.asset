@@ -14,6 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Player:Feature.Player:MineConfig
   Gravity: -9.8
   <CoyoteTime>k__BackingField: 1
-  JumpHeight: 100
+  JumpHeight: 1
+  MaxJumps: 2
+  LowestJumpingVelocity: 0.1
+  HighestFallingVelocity: 0.1
   <MovementSpeed>k__BackingField: 10
   <MouseSensitivity>k__BackingField: 1000
+  WallCheckFigureSize: 1
+  LeftWallCheckDirection: {x: -1, y: 0, z: 0}
+  RightWallCheckDirection: {x: 1, y: 0, z: 0}
+  WallCheckFigureShiftDistance: 1
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  GroundCheckFigureSize: 0.1
+  GroundCheckFigureShiftDistance: 1
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  ShowGroundCheckGizmos: 1
+  ShowWallCheckGizmos: 0

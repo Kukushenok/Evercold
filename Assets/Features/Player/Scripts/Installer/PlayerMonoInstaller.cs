@@ -8,14 +8,25 @@ namespace Feature.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
-        //[SerializeField] private PlayerConfig _mineConfig;
         [field: SerializeField] Transform _cameraTransform;
-        private List<ILocomotionFeature> _locomotionFeatures;
         [SerializeField] PlayerConfig _playerConfig;
-        //ILocomotionData _locomotion;
 
         public override void InstallBindings()
         {
+            Container
+                .Bind<PlayerConfig>()
+                .FromInstance(_playerConfig)
+                .AsSingle();
+
+            //Container
+            //    .InstantiateComponent<PlayerChecker>(this.gameObject);
+            Container
+                .BindInterfacesTo<PlayerChecker>()
+                .FromNewComponentOn(this.gameObject)
+                .AsSingle()
+                .WithArguments(_playerConfig);
+                //.FromInstance(GetComponent<PlayerChecker>());
+
             Container
                 .Bind<IPlayerLocomotion>()
                 .To<PlayerLocomotion>()
@@ -32,11 +43,6 @@ namespace Feature.Player
                 .To<KeyboardPlayerInput>()
                 .AsSingle()
                 .NonLazy();
-            
-            Container
-                .Bind<PlayerConfig>()
-                .FromInstance(_playerConfig)
-                .AsSingle();
             
             Container
                 .Bind<Rigidbody>()
@@ -65,6 +71,7 @@ namespace Feature.Player
                 .Bind<ILocomotionFeature>()
                 .To<CameraMoveLocomotionFeature>()
                 .AsSingle();
+            
             
             
             

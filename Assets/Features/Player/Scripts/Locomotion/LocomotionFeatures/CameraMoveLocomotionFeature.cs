@@ -17,7 +17,6 @@ public class CameraMoveLocomotionFeature : ILocomotionFeature
     }
     
     public void OnUpdate(IPlayerLocomotion loc) { 
-        Debug.Log(input.GetMouseMovementX());
         float mouseInstantRotationX = input.GetMouseMovementX() * config.MouseSensitivity * Time.deltaTime;
         float mouseInstantRotationY = input.GetMouseMovementY() * config.MouseSensitivity * Time.deltaTime;
         loc.PlayerRotation += new Vector3(0f, 1f, 0f) * mouseInstantRotationX;

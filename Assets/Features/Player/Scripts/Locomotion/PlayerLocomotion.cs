@@ -37,15 +37,19 @@ namespace Feature.Player
         private Transform _playerTransform;
         private Transform _cameraTransform;
         public Vector3 Velocity { get; set; }
-        public CharacterController Controller {get; private set;}
+        private CharacterController _controller;
 
         public PlayerLocomotion(Transform playerTransform, Transform cameraTransform, CharacterController controller)
         {
             _cameraTransform = cameraTransform;
             _playerTransform = playerTransform;
-            Controller = controller;
+            _controller = controller;
             Velocity = Vector3.zero;
             
+        }
+
+        public void FixedUpdate() {
+            _controller.Move(Velocity * Time.fixedDeltaTime);
         }
     }
 }

@@ -6,15 +6,26 @@ using Zenject;
 
 public class GravityLocomotionFeature : ILocomotionFeature
 {
-    [Inject] PlayerConfig config;
+    private PlayerConfig _config;
+    IPlayerGroundChecker _checker;
 
-    public void OnFixedUpdate(IPlayerLocomotion loc) {
-        //if (loc.Controller.isGrounded){loc.Velocity = Vector3.down*0.5f;}
-        loc.Velocity = loc.Velocity + Vector3.up * config.Gravity * Time.fixedDeltaTime;
-        //loc.Controller.Move(loc.Velocity * Time.fixedDeltaTime);
+    public GravityLocomotionFeature(PlayerConfig config, IPlayerGroundChecker checker)
+    {
+        _config = config;
+        _checker = checker;
     }
-    
-    public void OnUpdate(IPlayerLocomotion loc) { 
-        
+
+    public void OnFixedUpdate(IPlayerLocomotion loc)
+    {
+        if (_checker.IsOnGround() && loc.Velocity.y <= _config.LowestJumpingVelocity)
+        { // don't use HighestFallingVelocity here we need to include grounded state
+            loc.Velocity = new Vector3(loc.Velocity.x, -0.5f, loc.Velocity.z);
+        } //TODO: remove majic number
+        loc.Velocity = loc.Velocity + Vector3.up * _config.Gravity * Time.fixedDeltaTime;
+    }
+
+    public void OnUpdate(IPlayerLocomotion loc)
+    {
+
     }
 }
