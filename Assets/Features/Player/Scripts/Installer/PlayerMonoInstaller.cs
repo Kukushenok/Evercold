@@ -18,14 +18,21 @@ namespace Feature.Player
                 .FromInstance(_playerConfig)
                 .AsSingle();
 
-            //Container
-            //    .InstantiateComponent<PlayerChecker>(this.gameObject);
             Container
                 .BindInterfacesTo<PlayerChecker>()
                 .FromNewComponentOn(this.gameObject)
                 .AsSingle()
                 .WithArguments(_playerConfig);
-                //.FromInstance(GetComponent<PlayerChecker>());
+                
+            Container
+                .BindInterfacesTo<PlayerFacade>()
+                .FromNewComponentOn(this.gameObject)
+                .AsSingle();
+            
+            Container
+                .Bind<IPlayerLocomotionStatus>()
+                .To<PlayerLocomotionStatus>()
+                .AsSingle();
 
             Container
                 .Bind<IPlayerLocomotion>()
@@ -37,11 +44,16 @@ namespace Feature.Player
                 .BindInterfacesAndSelfTo<LocomotionUpdateManager>()
                 .AsSingle()
                 .NonLazy();
+
+            Container
+                .BindInterfacesAndSelfTo<PlayerInputActions>()
+                .AsSingle();
             
             Container
                 .Bind<IMovementInput>()
                 .To<KeyboardPlayerInput>()
                 .AsSingle()
+                .WithArguments(new PlayerInputActions())
                 .NonLazy();
             
             Container
@@ -55,9 +67,13 @@ namespace Feature.Player
                 .AsSingle();
             
             // locomotion features
+            //Container
+            //    .Bind<ILocomotionFeature>()
+            //    .To<JumpLocomotionFeature>()
+            //    .AsSingle();
             Container
                 .Bind<ILocomotionFeature>()
-                .To<JumpLocomotionFeature>()
+                .To<CurveJumpLocomotionFeature>()
                 .AsSingle();
             Container
                 .Bind<ILocomotionFeature>()
@@ -70,6 +86,10 @@ namespace Feature.Player
             Container
                 .Bind<ILocomotionFeature>()
                 .To<CameraMoveLocomotionFeature>()
+                .AsSingle();
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<SlideLocomotionFeature>()
                 .AsSingle();
             
             

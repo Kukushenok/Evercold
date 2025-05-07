@@ -1,0 +1,23 @@
+{
+    "name": "PlayerInstaller",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d4c1e674bf8e6cd41aaba4dd426c3615",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:b96afda8ba45df44485effc375dceed8",
+        "GUID:8c312ae27976cd240b76b6efc5134e8e",
+        "GUID:d4c1e674bf8e6cd41aaba4dd426c3615",
+        "GUID:91a8401a9b6beb04d9df2a7648ae8378",
+        "GUID:4f7c078b714503648af275b5831e34ae",
+        "GUID:1312695f141dbc5499304cecc09dcea3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
