@@ -21,6 +21,7 @@ public class GravityLocomotionFeature : ILocomotionFeature
         { // don't use HighestFallingVelocity here we need to include grounded state
             loc.Velocity = new Vector3(loc.Velocity.x, -0.5f, loc.Velocity.z);
         } //TODO: remove majic number
+        
         loc.Velocity = loc.Velocity + Vector3.up * _config.Gravity * Time.fixedDeltaTime;
     }
 

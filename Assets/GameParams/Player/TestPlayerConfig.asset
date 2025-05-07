@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8d58ac4704bea4a945f529d13384e4, type: 3}
   m_Name: TestPlayerConfig
   m_EditorClassIdentifier: Player:Feature.Player:MineConfig
-  Gravity: -9.8
+  <Gravity>k__BackingField: -9.8
   <CoyoteTime>k__BackingField: 1
-  JumpHeight: 10
+  JumpHeight: 4
   MaxJumps: 2
   JumpCurve:
     serializedVersion: 2
@@ -29,54 +29,36 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.4987982
-      value: 0.9992251
-      inSlope: 0.022771133
-      outSlope: 0.022771133
+      time: 0.4937356
+      value: 1.0064073
+      inSlope: 0.13595298
+      outSlope: 0.13595298
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.23336978
+      outWeight: 0.48431656
     - serializedVersion: 3
-      time: 0.58589995
-      value: 0.4012069
-      inSlope: -12.518642
-      outSlope: -2.212037
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.1626086
-      outWeight: 0.15296167
-    - serializedVersion: 3
-      time: 0.76780415
-      value: 2.344033
-      inSlope: -0.117654964
-      outSlope: -0.117654964
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.001648
-      value: -0.004722595
-      inSlope: -3.098285
-      outSlope: -3.098285
+      time: 0.9962158
+      value: -0.004119873
+      inSlope: -2.7740843
+      outSlope: -2.7740843
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0.3217939
+      inWeight: 0.08078059
+      outWeight: 0
     - serializedVersion: 3
-      time: 2.3684583
-      value: -3.4111533
-      inSlope: -2.194547
-      outSlope: -2.194547
+      time: 1.6377292
+      value: -1.3655317
+      inSlope: -2.2158132
+      outSlope: -2.2158132
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.11541811
+      inWeight: 0.2773239
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  JumpDuration: 3
+  JumpDuration: 0.5
   LowestJumpingVelocity: 0.1
   HighestFallingVelocity: 0.1
   SlideStrength: 50

@@ -6,7 +6,9 @@ namespace Feature.Player
     [CreateAssetMenu(menuName = "Configs.PlayerConfig", fileName = "PlayerConfig")]
     public class PlayerConfig : ScriptableObject
     {
-        [field: SerializeField] public float Gravity = -9.8f;
+        //[field: SerializeField, Header("General Params")]
+        //public bool _curvedJump = enum
+        [field: SerializeField] public float Gravity {get; private set;} = -9.8f;
         [field: SerializeField, Header("Jump Params")] public float CoyoteTime { get; private set; }
         [field: SerializeField] public float JumpHeight = 0f; // TODO: Make it really jump height, not jump force
         //[field: SerializeField] public CharacterControllerLocomotion.JumpSettings LocomotionSettings {get; private set;}

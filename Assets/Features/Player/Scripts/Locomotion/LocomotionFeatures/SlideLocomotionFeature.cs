@@ -27,11 +27,13 @@ public class SlideLocomotionFeature : ILocomotionFeature
             loc.CameraPosition = _config.CameraSlideLocalPosition;
             loc.Status.IsSliding = true;
         }
-        if (loc.Status.IsSliding && !_movementInput.IsSliding())
+        else if (loc.Status.IsSliding && !_movementInput.IsSliding())
         {
             loc.CameraPosition = _config.CameraDefaultLocalPosition;
             loc.Status.IsSliding = false;
         }
+        
+        
         if (loc.Status.IsJumping)
         {
             loc.Status.IsSliding = false;

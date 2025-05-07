@@ -49,6 +49,10 @@ public class CurveJumpLocomotionFeature : ILocomotionFeature
             loc.Status.IsJumping = false;
         }
 
+        # if UNITY_EDITOR
+        _maxTime = _config.JumpCurve.keys[_config.JumpCurve.length - 1].time - 0.05f;
+        # endif
+
 
 
     }
@@ -72,7 +76,7 @@ public class CurveJumpLocomotionFeature : ILocomotionFeature
 
     float GetVelocity(float time)
     {
-        float dt = 0.01f;
+        float dt = Time.fixedDeltaTime;
         float t1 = time - dt;
         float t2 = time + dt;
         float pos1 = _config.JumpCurve.Evaluate(t1);
@@ -83,7 +87,7 @@ public class CurveJumpLocomotionFeature : ILocomotionFeature
 
     float GetAcceleration(float time)
     {
-        float dt = 0.01f;
+        float dt = Time.fixedDeltaTime;
         float v1 = GetVelocity(time - dt);
         float v2 = GetVelocity(time + dt);
         return (v2 - v1) / (2 * dt);
