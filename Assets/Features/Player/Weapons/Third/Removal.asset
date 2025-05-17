@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed268bdf2fe8a5641b5e7bcbd1c7253a, type: 3}
+  m_Name: Removal
+  m_EditorClassIdentifier: 
+  <WeaponInfo>k__BackingField:
+    <Identifier>k__BackingField: Removal
+    <WeaponViewPrefab>k__BackingField: {fileID: 957324032175958516, guid: d857036e62eef9f4186cff50ce703b9f,
+      type: 3}
