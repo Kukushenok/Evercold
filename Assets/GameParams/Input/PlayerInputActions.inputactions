@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInputActions",
     "maps": [
         {
             "name": "Player",
@@ -54,6 +54,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "9f4c0811-6756-4aea-8838-777fdd634da7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slam",
+                    "type": "Button",
+                    "id": "f964b64d-7e12-4db1-94c0-041b2fe7b251",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -295,7 +304,7 @@
                 {
                     "name": "",
                     "id": "409cbb19-3136-4105-8098-282d5e1e2fc3",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -311,6 +320,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef649ab4-a3d9-436e-a961-9e9ab7de99af",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

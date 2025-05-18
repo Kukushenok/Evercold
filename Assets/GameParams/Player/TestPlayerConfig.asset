@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Player:Feature.Player:MineConfig
   <Gravity>k__BackingField: -9.8
   <CoyoteTime>k__BackingField: 1
-  JumpHeight: 4
-  MaxJumps: 2
-  JumpCurve:
+  <PlayerJumpType>k__BackingField: 0
+  <JumpHeight>k__BackingField: 1
+  <MaxJumps>k__BackingField: 2
+  <JumpCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -29,56 +30,70 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.4937356
-      value: 1.0064073
-      inSlope: 0.13595298
-      outSlope: 0.13595298
+      time: 0.50334144
+      value: 0.9989553
+      inSlope: -0.02895787
+      outSlope: -0.02895787
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.48431656
+      outWeight: 0.18998906
     - serializedVersion: 3
-      time: 0.9962158
-      value: -0.004119873
-      inSlope: -2.7740843
-      outSlope: -2.7740843
+      time: 0.99835205
+      value: -0.0066108704
+      inSlope: -4.561216
+      outSlope: -4.561216
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08078059
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.1602166
     - serializedVersion: 3
-      time: 1.6377292
-      value: -1.3655317
-      inSlope: -2.2158132
-      outSlope: -2.2158132
-      tangentMode: 0
+      time: 1.5273275
+      value: -2.1622434
+      inSlope: -4.0751085
+      outSlope: -4.0751085
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.2773239
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  JumpDuration: 0.5
-  LowestJumpingVelocity: 0.1
-  HighestFallingVelocity: 0.1
-  SlideStrength: 50
-  SlideDirection: {x: 0, y: 0, z: 1}
-  CameraSlideLocalPosition: {x: 0, y: -0.73, z: 0}
-  CameraDefaultLocalPosition: {x: 0, y: 0.658, z: 0}
+  <JumpDuration>k__BackingField: 0.5
+  <LowestJumpingVelocity>k__BackingField: 0.1
+  <HighestFallingVelocity>k__BackingField: 0.1
+  <SlideStrength>k__BackingField: 10
+  <PlayerSlideType>k__BackingField: 1
+  <SlideCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <SlideDirection>k__BackingField: {x: 0, y: 0, z: 1}
+  <CameraSlideLocalPosition>k__BackingField: {x: 0, y: -0.73, z: 0}
+  <CameraDefaultLocalPosition>k__BackingField: {x: 0, y: 0.658, z: 0}
+  <DashSpeed>k__BackingField: 30
+  <DashDuration>k__BackingField: 0.2
+  <MaxDashAmount>k__BackingField: 3
+  <PlayerSlamType>k__BackingField: 0
+  <SlamAcceleration>k__BackingField: 1
+  <SlamHeight>k__BackingField: 3
   <MovementSpeed>k__BackingField: 30
-  MovementDrag: 5
+  <MovementDrag>k__BackingField: 5
+  <AirControlMultiplyer>k__BackingField: 1
   <MouseSensitivity>k__BackingField: 100
-  WallCheckFigureSize: 0.33
-  LeftWallCheckDirection: {x: -1, y: 0, z: 0}
-  RightWallCheckDirection: {x: 1, y: 0, z: 0}
-  WallCheckFigureShiftDistance: 1
-  WallLayerMask:
+  <WallCheckFigureSize>k__BackingField: 0.33
+  <LeftWallCheckDirection>k__BackingField: {x: -1, y: 0, z: 0}
+  <RightWallCheckDirection>k__BackingField: {x: 1, y: 0, z: 0}
+  <WallCheckFigureShiftDistance>k__BackingField: 1
+  <WallLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 51
-  GroundCheckFigureSize: 0.1
-  GroundCheckFigureShiftDistance: 1
-  GroundLayerMask:
+    m_Bits: 3
+  <GroundCheckFigureSize>k__BackingField: 0.1
+  <GroundCheckFigureShiftDistance>k__BackingField: 1
+  <GroundLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 51
-  ShowGroundCheckGizmos: 1
-  ShowWallCheckGizmos: 1
+    m_Bits: 3
+  <ShowGroundCheckGizmos>k__BackingField: 1
+  <ShowWallCheckGizmos>k__BackingField: 1

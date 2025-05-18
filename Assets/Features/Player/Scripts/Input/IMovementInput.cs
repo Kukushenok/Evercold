@@ -15,5 +15,6 @@ namespace Feature.Player
         bool IsSliding();
         bool IsJumping();
         bool IsDashing();
+        bool IsSlamming();
     }
 }

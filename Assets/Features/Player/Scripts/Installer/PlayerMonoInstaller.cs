@@ -11,6 +11,7 @@ namespace Feature.Player
         [field: SerializeField] Transform _cameraTransform;
         [SerializeField] PlayerConfig _playerConfig;
 
+
         public override void InstallBindings()
         {
             Container
@@ -23,12 +24,12 @@ namespace Feature.Player
                 .FromNewComponentOn(this.gameObject)
                 .AsSingle()
                 .WithArguments(_playerConfig);
-                
+
             Container
                 .BindInterfacesTo<PlayerFacade>()
                 .FromNewComponentOn(this.gameObject)
                 .AsSingle();
-            
+
             Container
                 .Bind<IPlayerLocomotionStatus>()
                 .To<PlayerLocomotionStatus>()
@@ -48,37 +49,51 @@ namespace Feature.Player
             Container
                 .BindInterfacesAndSelfTo<PlayerInputActions>()
                 .AsSingle();
-            
+
             Container
                 .Bind<IMovementInput>()
                 .To<KeyboardPlayerInput>()
                 .AsSingle()
                 .WithArguments(new PlayerInputActions())
                 .NonLazy();
-            
+
             Container
                 .Bind<Rigidbody>()
                 .FromInstance(GetComponent<Rigidbody>())
                 .AsSingle();
-            
+
             Container
                 .Bind<CharacterController>()
                 .FromInstance(GetComponent<CharacterController>())
                 .AsSingle();
-            
+
+
             // locomotion features
-            //Container
-            //    .Bind<ILocomotionFeature>()
-            //    .To<JumpLocomotionFeature>()
-            //    .AsSingle();
-            Container
-                .Bind<ILocomotionFeature>()
-                .To<CurveJumpLocomotionFeature>()
-                .AsSingle();
-            Container
-                .Bind<ILocomotionFeature>()
-                .To<GravityLocomotionFeature>()
-                .AsSingle();
+
+            if (_playerConfig.PlayerJumpType == PlayerConfig.JumpType.Curve)
+            {
+                Container
+                    .Bind<ILocomotionFeature>()
+                    .To<CurveJumpLocomotionFeature>()
+                    .AsSingle();
+                Container
+                    .Bind<ILocomotionFeature>()
+                    .To<CurveGravityLocomotionFeature>()
+                    .AsSingle();
+            }
+            else
+            {
+                Container
+                    .Bind<ILocomotionFeature>()
+                    .To<JumpLocomotionFeature>()
+                    .AsSingle();
+                Container
+                    .Bind<ILocomotionFeature>()
+                    .To<GravityLocomotionFeature>()
+                    .AsSingle();
+            }
+
+
             Container
                 .Bind<ILocomotionFeature>()
                 .To<MoveLocomotionFeature>()
@@ -91,10 +106,14 @@ namespace Feature.Player
                 .Bind<ILocomotionFeature>()
                 .To<SlideLocomotionFeature>()
                 .AsSingle();
-            
-            
-            
-            
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<DashLocomotionFeature>()
+                .AsSingle();
+
+
+
+
             //Container.Bind<IPlayerLocomotion>().AsSingle();
             //Container.Bind<IPlayerLocomotionFeature>().To<MoveLocomotionFeature>().AsCached().WithArguments(_mineConfig.MovementSpeed);
             //Container.Bind<IPlayerLocomotionFeature>().To<CoyoteTimeJumpLocomotionFeature>().AsCached().WithArguments(_mineConfig.CoyoteTime);

@@ -18,12 +18,13 @@ namespace Feature.Player
         private InputAction _jump;
         private InputAction _slide;
         private InputAction _dash;
+        private InputAction _slam;
 
         [Inject]
         public void Construct(PlayerInputActions actions)
         {
             _inputActions = actions;
-            
+
             _move = _inputActions.Player.Move;
             _move.Enable();
 
@@ -42,11 +43,15 @@ namespace Feature.Player
             _dash = _inputActions.Player.Dash;
             _dash.Enable();
 
+            _slam = _inputActions.Player.Slam;
+            _slam.Enable();
+
         }
 
         public bool IsSliding() { return _slide.IsPressed(); }
         public bool IsJumping() { return _jump.WasPressedThisFrame(); }
         public bool IsDashing() { return _dash.WasPressedThisFrame(); }
+        public bool IsSlamming() { return _slam.WasPressedThisFrame(); }
         public float GetMouseMovementX() { return GetMouseMovement().x; }
         public float GetMouseMovementY() { return GetMouseMovement().y; }
         public float GetHorizontalMovement() { return GetMovement().x; }
