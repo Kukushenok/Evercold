@@ -14,6 +14,7 @@ namespace Feature.Player
         private int _jumpsLeft = 1;
         private IPlayerGroundChecker _groundChecker;
         private IPlayerWallChecker _wallChecker;
+        private float _coyoteTimer = 0f;
 
         public JumpLocomotionFeature(PlayerConfig config, IMovementInput movementInput, IPlayerGroundChecker groundChecker, IPlayerWallChecker wallChecker)
         {
@@ -34,6 +35,20 @@ namespace Feature.Player
                 _jumpsLeft = _config.MaxJumps;
                 loc.Status.IsJumping = false;
             }
+            
+            if (!_groundChecker.IsOnGround() && !loc.Status.IsJumping && !_wallChecker.IsCollidingWithWalls() && _coyoteTimer <= 0 && _jumpsLeft == _config.MaxJumps)
+            {
+                _coyoteTimer = _config.CoyoteTime;
+            }
+            if (_coyoteTimer > 0 && !loc.Status.IsJumping)
+            {
+                _coyoteTimer -= Time.fixedDeltaTime;
+                if (_coyoteTimer <= 0)
+                {
+                    _coyoteTimer = 0;
+                    _jumpsLeft -= 1;
+                }
+            }
 
         }
 
@@ -41,15 +56,19 @@ namespace Feature.Player
         {
             if (_movementInput.IsJumping() && _jumpsLeft > 0)
             {
+                _coyoteTimer = 0;
                 loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpHeight * -_config.Gravity, loc.Velocity.z);
                 _jumpsLeft -= 1;
                 loc.Status.IsJumping = true;
             }
-            if (_movementInput.IsJumping() && _wallChecker.IsCollidingWithWalls())
+            if (_movementInput.IsJumping() && _wallChecker.IsCollidingWithWalls() && !_groundChecker.IsOnGround())
             {
+                _coyoteTimer = 0;
                 loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpHeight * -_config.Gravity, loc.Velocity.z);
                 loc.Status.IsJumping = true;
             }
+
+            
         }
     }
 }

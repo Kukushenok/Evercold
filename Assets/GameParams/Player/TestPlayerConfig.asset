@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestPlayerConfig
   m_EditorClassIdentifier: Player:Feature.Player:MineConfig
   <Gravity>k__BackingField: -9.8
-  <CoyoteTime>k__BackingField: 1
+  <CoyoteTime>k__BackingField: 0.1
   <PlayerJumpType>k__BackingField: 0
   <JumpHeight>k__BackingField: 1
   <MaxJumps>k__BackingField: 2
@@ -21,48 +21,93 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.0018959045
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.50334144
-      value: 0.9989553
-      inSlope: -0.02895787
-      outSlope: -0.02895787
+      time: 0.28072262
+      value: 0.83924633
+      inSlope: -7.8832374
+      outSlope: -5.9438043
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.071433604
+      outWeight: 0.4282098
+    - serializedVersion: 3
+      time: 0.34754643
+      value: 0.5046237
+      inSlope: -3.5509064
+      outSlope: -2.713336
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0.2690485
+    - serializedVersion: 3
+      time: 0.46455786
+      value: 0.7112373
+      inSlope: -2.6290636
+      outSlope: -2.6290636
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.39382473
+      outWeight: 0.30325675
+    - serializedVersion: 3
+      time: 0.66207266
+      value: 0.87414503
+      inSlope: -1.5499051
+      outSlope: -1.5499051
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.39394492
+      outWeight: 0.26059482
+    - serializedVersion: 3
+      time: 0.7402408
+      value: 0.37237686
+      inSlope: -6.7389636
+      outSlope: -2.1429818
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.29002917
+      outWeight: 0.35761985
+    - serializedVersion: 3
+      time: 1
+      value: 0.2
+      inSlope: 0.12379601
+      outSlope: 0.12379601
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.29602054
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.9407033
+      value: -0.32485104
+      inSlope: -20.949564
+      outSlope: -20.949564
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.18998906
+      outWeight: 0.15169193
     - serializedVersion: 3
-      time: 0.99835205
-      value: -0.0066108704
-      inSlope: -4.561216
-      outSlope: -4.561216
+      time: 1.9601566
+      value: -0.41316172
+      inSlope: -4.686879
+      outSlope: -4.686879
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.1602166
-    - serializedVersion: 3
-      time: 1.5273275
-      value: -2.1622434
-      inSlope: -4.0751085
-      outSlope: -4.0751085
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.010286208
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <JumpDuration>k__BackingField: 0.5
+  <JumpDuration>k__BackingField: 3
   <LowestJumpingVelocity>k__BackingField: 0.1
   <HighestFallingVelocity>k__BackingField: 0.1
-  <SlideStrength>k__BackingField: 10
+  <SlideLength>k__BackingField: 10
   <PlayerSlideType>k__BackingField: 1
   <SlideCurve>k__BackingField:
     serializedVersion: 2
@@ -71,14 +116,23 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <SlideDirection>k__BackingField: {x: 0, y: 0, z: 1}
+  SlideDuration: 1
   <CameraSlideLocalPosition>k__BackingField: {x: 0, y: -0.73, z: 0}
   <CameraDefaultLocalPosition>k__BackingField: {x: 0, y: 0.658, z: 0}
   <DashSpeed>k__BackingField: 30
   <DashDuration>k__BackingField: 0.2
   <MaxDashAmount>k__BackingField: 3
   <PlayerSlamType>k__BackingField: 0
-  <SlamAcceleration>k__BackingField: 1
-  <SlamHeight>k__BackingField: 3
+  SlamCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <SlamStartSpeed>k__BackingField: 0
+  <SlamAcceleration>k__BackingField: 10
+  <SlamRayCheckerHeight>k__BackingField: 3
+  <SlamRayCheckerRadius>k__BackingField: 0.1
   <MovementSpeed>k__BackingField: 30
   <MovementDrag>k__BackingField: 5
   <AirControlMultiplyer>k__BackingField: 1

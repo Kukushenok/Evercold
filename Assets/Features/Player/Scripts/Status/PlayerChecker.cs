@@ -18,7 +18,12 @@ namespace Feature.Player
         bool IsOnGround();
     }
 
-    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker
+    public interface IPlayerSlamHeightChecker
+    {
+        bool IsEnoughHeight();
+    }
+
+    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker, IPlayerSlamHeightChecker
     {
         private PlayerConfig _config;
         [Inject]
@@ -67,7 +72,17 @@ namespace Feature.Player
             return false;
         }
 
-
+        public bool IsEnoughHeight()
+        {
+            if (Physics.SphereCast(
+                transform.position,
+                _config.SlamRayCheckerRadius,
+                Vector3.down,
+                out _,
+                _config.SlamRayCheckerHeight,
+                _config.GroundLayerMask
+                )) return true; return false;
+        }
         void OnDrawGizmos()
         {
             if (_config.ShowGroundCheckGizmos) Gizmos.DrawSphere(transform.position + Vector3.down * _config.GroundCheckFigureShiftDistance, _config.GroundCheckFigureSize);

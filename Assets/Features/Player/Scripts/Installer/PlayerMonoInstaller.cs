@@ -110,6 +110,10 @@ namespace Feature.Player
                 .Bind<ILocomotionFeature>()
                 .To<DashLocomotionFeature>()
                 .AsSingle();
+            Container
+                .Bind<ILocomotionFeature>()
+                .To<SlamLocomotionFeature>()
+                .AsSingle();
 
 
 

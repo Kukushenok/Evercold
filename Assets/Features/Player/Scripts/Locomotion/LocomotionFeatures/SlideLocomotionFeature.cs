@@ -27,11 +27,11 @@ namespace Feature.Player
                 Quaternion rotation = Quaternion.Euler(0, loc.PlayerRotation.y, 0);
                 if (_config.PlayerSlideType == PlayerConfig.SlideType.Addition)
                 {
-                    loc.Velocity += rotation * (_config.SlideDirection.normalized * _config.SlideStrength);
+                    loc.Velocity += rotation * (_config.SlideDirection.normalized * _config.SlideLength);
                 }
                 else if (_config.PlayerSlideType == PlayerConfig.SlideType.Multiply)
                 {
-                    loc.Velocity *= _config.SlideStrength;
+                    loc.Velocity *= _config.SlideLength;
                 }
                 loc.CameraPosition = _config.CameraSlideLocalPosition;
                 loc.Status.IsSliding = true;

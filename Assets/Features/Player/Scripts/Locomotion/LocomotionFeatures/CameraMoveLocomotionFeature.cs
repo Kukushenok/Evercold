@@ -28,7 +28,6 @@ namespace Feature.Player
             float mouseInstantRotationX = input.GetMouseMovementX() * config.MouseSensitivity * Time.deltaTime;
             float mouseInstantRotationY = input.GetMouseMovementY() * config.MouseSensitivity * Time.deltaTime;
             loc.PlayerRotation += new Vector3(0f, 1f, 0f) * mouseInstantRotationX;
-            UnityEngine.Debug.Log(loc.CameraRotation.x - mouseInstantRotationY);
             _pitch = Mathf.Clamp(_pitch - mouseInstantRotationY, -80f, 80f);
             //loc.CameraRotation = new Vector3(Mathf.Clamp(loc.CameraRotation.x - mouseInstantRotationY, -80f, 80f), 0f, 0f);
             loc.CameraRotation = new Vector3(_pitch, 0f, 0f);
