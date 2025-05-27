@@ -7,7 +7,7 @@ namespace Feature.Player
 {
     public interface IPlayerLocomotion
     {
-        public Vector3 CameraForwardVec { get; }
+        public IPlayerLocomotionStatus Status {get;}
         public Vector3 CameraPosition {get; set;}
         public Vector3 CameraRotation { get; set; } // eulerAngles
         public Vector3 PlayerPosition {get; set;}
@@ -19,10 +19,10 @@ namespace Feature.Player
 
     public class PlayerLocomotion : IPlayerLocomotion
     {
-        public Vector3 CameraForwardVec => _cameraTransform.forward;
+        public IPlayerLocomotionStatus Status {get; private set;}
         public Vector3 CameraPosition {
-            get => _cameraTransform.position;
-            set => _cameraTransform.position = value;
+            get => _cameraTransform.localPosition;
+            set => _cameraTransform.localPosition = value;
         }
         public Vector3 CameraRotation {
             get => _cameraTransform.localRotation.eulerAngles;
@@ -42,14 +42,19 @@ namespace Feature.Player
         private CharacterController _controller;
         private PlayerConfig _config;
 
-        public PlayerLocomotion(Transform playerTransform, Transform cameraTransform, CharacterController controller, PlayerConfig config)
+        public PlayerLocomotion(
+            Transform playerTransform,
+            Transform cameraTransform, 
+            CharacterController controller, 
+            PlayerConfig config, 
+            IPlayerLocomotionStatus status)
         {
             _cameraTransform = cameraTransform;
             _playerTransform = playerTransform;
             _controller = controller;
             Velocity = Vector3.zero;
             _config = config; 
-            
+            Status = status;
         }
 
         public void FixedUpdate() {

@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnableable
+namespace Feature.Player
 {
-    bool Enabled { get; set; }
+    public interface IEnableable
+    {
+        bool Enabled { get; }
+    }
 }

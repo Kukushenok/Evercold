@@ -1,9 +1,8 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerStatus",
     "rootNamespace": "",
     "references": [
-        "GUID:4f7c078b714503648af275b5831e34ae",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:22869beced4eefe438be70428442fba6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

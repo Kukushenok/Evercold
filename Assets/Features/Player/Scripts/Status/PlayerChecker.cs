@@ -8,6 +8,8 @@ namespace Feature.Player
     public interface IPlayerWallChecker
     {
         bool IsCollidingWithWalls();
+        bool IsCollidingWithRightWall();
+        bool IsCollidingWithLeftWall();
     }
 
 
@@ -16,7 +18,12 @@ namespace Feature.Player
         bool IsOnGround();
     }
 
-    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker
+    public interface IPlayerSlamHeightChecker
+    {
+        bool IsEnoughHeight();
+    }
+
+    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker, IPlayerSlamHeightChecker
     {
         private PlayerConfig _config;
         [Inject]
@@ -28,41 +35,92 @@ namespace Feature.Player
         {
             _config = config;
         }
-        public bool IsOnGround() { 
+        public bool IsOnGround()
+        {
             return Physics.SphereCast(
                 transform.position,
                 _config.GroundCheckFigureSize,
                 Vector3.down,
-                out _, 
+                out _,
                 _config.WallCheckFigureShiftDistance,
                 _config.GroundLayerMask);
-         }
-        
-        public bool IsCollidingWithWalls() { 
-            if (Physics.SphereCast(
+        }
+
+        public bool IsCollidingWithWalls()
+        {
+            // return IsCollidingWithRightWall();
+            return IsCollidingWithRightWall() || IsCollidingWithLeftWall();
+        }
+        public bool IsCollidingWithRightWall()
+        {
+            if (Physics.CheckCapsule(
                 transform.position,
+                transform.position + transform.TransformDirection(_config.RightWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
                 _config.WallCheckFigureSize,
-                _config.LeftWallCheckDirection,
-                out _,
-                _config.WallCheckFigureShiftDistance,
                 _config.WallLayerMask)) return true;
-            if (Physics.SphereCast(
+
+            return false;
+        }
+
+        public bool IsCollidingWithLeftWall()
+        {
+            if (Physics.CheckCapsule(
                 transform.position,
-                _config.WallCheckFigureSize,
-                _config.RightWallCheckDirection,
-                out _,
+                transform.position + transform.TransformDirection(_config.LeftWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
                 _config.WallCheckFigureShiftDistance,
                 _config.WallLayerMask)) return true;
             return false;
         }
 
+        public bool IsEnoughHeight()
+        {
+            if (Physics.SphereCast(
+                transform.position,
+                _config.SlamRayCheckerRadius,
+                Vector3.down,
+                out _,
+                _config.SlamRayCheckerHeight,
+                _config.GroundLayerMask
+                )) return true; return false;
+        }
         void OnDrawGizmos()
         {
-            if (_config.ShowGroundCheckGizmos) Gizmos.DrawSphere(transform.position+Vector3.down*_config.GroundCheckFigureShiftDistance, _config.GroundCheckFigureSize);
-            if (_config.ShowWallCheckGizmos) {
-                Gizmos.DrawSphere(transform.position+_config.LeftWallCheckDirection*_config.WallCheckFigureShiftDistance, _config.WallCheckFigureSize);
-                Gizmos.DrawSphere(transform.position+_config.RightWallCheckDirection*_config.WallCheckFigureShiftDistance, _config.WallCheckFigureSize);
-                }
+            if (_config.ShowGroundCheckGizmos) Gizmos.DrawSphere(transform.position + Vector3.down * _config.GroundCheckFigureShiftDistance, _config.GroundCheckFigureSize);
+            if (_config.ShowWallCheckGizmos)
+            {
+                //Gizmos.DrawSphere(transform.position + transform.TransformDirection(_config.LeftWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance, _config.WallCheckFigureSize);
+                //Gizmos.DrawSphere(transform.position + transform.TransformDirection(_config.RightWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance, _config.WallCheckFigureSize);
+                DrawCapsuleGizmo(
+                    transform.position,
+                    transform.position + transform.TransformDirection(_config.RightWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
+                    _config.WallCheckFigureSize
+                );
+                DrawCapsuleGizmo(
+                    transform.position,
+                    transform.position + transform.TransformDirection(_config.LeftWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
+                    _config.WallCheckFigureSize
+                );
+            }
+        }
+
+        private void DrawCapsuleGizmo(Vector3 start, Vector3 end, float radius)
+        {
+            // Нарисовать линии между сферами
+            Vector3 up = Vector3.up * radius;
+            Vector3 right = Vector3.right * radius;
+            Vector3 forward = Vector3.forward * radius;
+
+            // Соединяем окружности (псевдо-цилиндр)
+            Gizmos.DrawLine(start + up, end + up);
+            Gizmos.DrawLine(start - up, end - up);
+            Gizmos.DrawLine(start + right, end + right);
+            Gizmos.DrawLine(start - right, end - right);
+            Gizmos.DrawLine(start + forward, end + forward);
+            Gizmos.DrawLine(start - forward, end - forward);
+
+            // Нарисовать сферы на концах
+            Gizmos.DrawWireSphere(start, radius);
+            Gizmos.DrawWireSphere(end, radius);
         }
 
     }

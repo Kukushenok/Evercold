@@ -1,9 +1,11 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerLocomotion",
     "rootNamespace": "",
     "references": [
-        "GUID:4f7c078b714503648af275b5831e34ae",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:48dfcf3375e9c4b4b9ca93c871df68e2",
+        "GUID:22869beced4eefe438be70428442fba6",
+        "GUID:4ea395a31b5ccfd4ba764be7d57b69fb",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

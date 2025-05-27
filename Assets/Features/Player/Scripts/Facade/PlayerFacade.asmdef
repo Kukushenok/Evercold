@@ -1,9 +1,9 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerFacade",
     "rootNamespace": "",
     "references": [
-        "GUID:4f7c078b714503648af275b5831e34ae",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:0a414c9e2fbc14543bea58ca09e3bebb",
+        "GUID:b2e031c4e537d4949a3e48cd34b69f7f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
