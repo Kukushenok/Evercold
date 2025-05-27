@@ -45,13 +45,15 @@ namespace Feature.Player.WeaponManager
                 OnShootButtonPressed?.Invoke();
                 //Quaternion eulers = Quaternion.Euler(locomotion.CameraRotation) * Quaternion.Euler(locomotion.PlayerRotation);
                 //Vector3 d = eulers * Vector3.forward;
-                Ray rd = new Ray(locomotion.CameraPosition, locomotion.CameraForwardVec);
-                RaycastHit[] ht = Physics.SphereCastAll(rd, 0.8f, 0.8f);
+                Ray rd = new Ray(locomotion.CameraGlobalPosition, locomotion.CameraForwardVec);
+                RaycastHit[] ht = Physics.SphereCastAll(rd, 0.8f, 1.8f);
                 foreach (RaycastHit info in ht)
                 {
+                    if (info.collider.name == "Player") continue; // SHIT CODING
                     if(info.collider != null && info.collider.TryGetComponent(out IDamageable dmg))
                     {
-                        dmg.TakeDamage(new AttackData(10, null, locomotion.CameraForwardVec * 2 + Vector3.up * 4));
+                        dmg.TakeDamage(new AttackData(10, null, locomotion.CameraForwardVec * 6));
+                        locomotion.Velocity += new Vector3(0, 1, 0);
                     }
                     GameObject gm = instantiator.InstantiatePrefab(bullet);
                     gm.transform.position = info.point;
@@ -62,11 +64,12 @@ namespace Feature.Player.WeaponManager
             public void Tick()
             {
                 if (dt > 0) dt -= Time.deltaTime;
-                else if (shootInput.LeftButtonDown())
+                else if (Enabled && shootInput.LeftButtonDown())
                 {
                     Shoot();
-                    dt += 0.5f;
+                    dt += 0.1f;
                 }
+                
             }
         }
 

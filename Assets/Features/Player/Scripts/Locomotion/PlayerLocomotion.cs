@@ -10,6 +10,9 @@ namespace Feature.Player
         public IPlayerLocomotionStatus Status {get;}
         public Vector3 CameraPosition {get; set;}
         public Vector3 CameraRotation { get; set; } // eulerAngles
+
+        public Vector3 CameraForwardVec { get; set; }
+        public Vector3 CameraGlobalPosition { get; }
         public Vector3 PlayerPosition {get; set;}
         public Vector3 PlayerRotation {get; set;} // eulerAngles
         public Vector3 Velocity { get; set; }
@@ -28,6 +31,16 @@ namespace Feature.Player
             get => _cameraTransform.localRotation.eulerAngles;
             set => _cameraTransform.localRotation = Quaternion.Euler(value);
             }
+
+        public Vector3 CameraForwardVec
+        {
+            get => _cameraTransform.forward;
+            set => _cameraTransform.forward = value;
+        }
+        public Vector3 CameraGlobalPosition
+        {
+            get => _cameraTransform.position;
+        }
         public Vector3 PlayerPosition {
             get => _playerTransform.position;
             set => _playerTransform.position = value;

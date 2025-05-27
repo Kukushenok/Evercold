@@ -7,7 +7,7 @@ namespace Feature.Player
     public class PlayerFacade : MonoBehaviour, IEnableable, IDamageable
     {
 
-        public bool Enabled { get; private set; }
+        public bool Enabled { get; set; }
 
         [SerializeField] private PlayerHealth playerHealth;
         public void TakeDamage(AttackData attackData) => playerHealth.TakeDamage(attackData);

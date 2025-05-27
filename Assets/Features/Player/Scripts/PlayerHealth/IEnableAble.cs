@@ -6,6 +6,6 @@ namespace Feature.Player
 {
     public interface IEnableable
     {
-        bool Enabled { get; }
+        bool Enabled { get; set; }
     }
 }

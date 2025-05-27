@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Feature.EnemyComboLogic
     {
         public bool IsOnGround();
     }
-    public class SampleGroundChecker: IGroundChecker
+    public class SampleGroundChecker : IGroundChecker
     {
         private float yLevel;
         private Transform transform;
@@ -24,42 +25,66 @@ namespace Feature.EnemyComboLogic
             return transform.position.y <= yLevel;
         }
     }
+    public interface IEnemyDamageReactorCallbackReciever
+    {
+        public void GroundedStateChanged(bool state);
+        public void Damaged(AttackData dt);
+    }
     public class EnemyDamageReactor : MonoBehaviour, IDamageable
     {
         private Rigidbody rigidbody;
         private IGroundChecker groundChecker;
-        private float verticalVelocity;
+        private Settings settings;
+        private IEnemyDamageReactorCallbackReciever reciever;
+        private bool wasOnGround = false;
         [Inject]
-        private void Construct(Rigidbody rigidbody, IGroundChecker groundChecker, float velocity)
+        private void Construct(Rigidbody rigidbody, IGroundChecker groundChecker, IEnemyDamageReactorCallbackReciever reciever, Settings settings)
         {
             this.rigidbody = rigidbody;
             this.groundChecker = groundChecker;
-            verticalVelocity = velocity;
+            this.settings = settings;
+            this.reciever = reciever;
         }
 
         public void TakeDamage(AttackData attackData)
         {
-            if (attackData.AssociatedKnockback != null) {
+            if (attackData.AssociatedKnockback != null)
+            {
                 Vector3 direction = attackData.AssociatedKnockback.Value;
                 direction.y = 0;
-                direction = direction.normalized;
                 Vector3 associatedVelocity = Vector3.zero;
                 bool yElevationSaver = false;
                 if (groundChecker.IsOnGround())
                 {
-                    direction.y += verticalVelocity;
+                    direction.y += settings.VerticalVelocity;
                 }
                 else
                 {
                     yElevationSaver = true;
                 }
-                direction *= 4;
                 rigidbody.AddForce(direction, ForceMode.Impulse);
                 if (yElevationSaver)
                 {
-                    rigidbody.velocity += new Vector3(0, 1.0f - rigidbody.velocity.y, 0);
+                    rigidbody.velocity += new Vector3(0, Physics.gravity.magnitude * settings.ElevationSafeTime / 2 - rigidbody.velocity.y * settings.ElevationVelocityRatio, 0);
                 }
             }
+            reciever.Damaged(attackData);
+        }
+        public void Update()
+        {
+            bool gdr = groundChecker.IsOnGround();
+            if (gdr != wasOnGround)
+            {
+                reciever.GroundedStateChanged(gdr);
+                wasOnGround = gdr;
+            }
+        }
+        [Serializable]
+        public class Settings
+        {
+            [field: SerializeField] public float VerticalVelocity { get; private set; }
+            [field: SerializeField] public float ElevationSafeTime { get; private set; }
+            [field: SerializeField, Range(0, 1)] public float ElevationVelocityRatio { get; private set; }
         }
     }
 }

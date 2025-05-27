@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponInfo>k__BackingField:
     <Identifier>k__BackingField: miniko
-    <WeaponViewPrefab>k__BackingField: {fileID: 957324032175958516, guid: 73c78914c6d2e12459eecf43f87927f3,
+    <WeaponViewPrefab>k__BackingField: {fileID: 957324032175958516, guid: 57120529bae99304bab855b56f126965,
       type: 3}
   <bulletPrefab>k__BackingField: {fileID: 6583517554053036386, guid: 333d9eddfd6ba244087cb0a4360b4590,
     type: 3}
