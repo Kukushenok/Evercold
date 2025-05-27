@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c3f192db5fd98469abc0955bc49807, type: 3}
+  m_Name: AimedWeapon
+  m_EditorClassIdentifier: 
+  <WeaponInfo>k__BackingField:
+    <Identifier>k__BackingField: miniko
+    <WeaponViewPrefab>k__BackingField: {fileID: 957324032175958516, guid: 73c78914c6d2e12459eecf43f87927f3,
+      type: 3}
+  <bulletPrefab>k__BackingField: {fileID: 6583517554053036386, guid: 333d9eddfd6ba244087cb0a4360b4590,
+    type: 3}

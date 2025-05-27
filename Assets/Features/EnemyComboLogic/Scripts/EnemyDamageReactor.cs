@@ -1,7 +1,7 @@
-using Feature.Health;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Feature.EnemyComboLogic
 {
@@ -24,14 +24,17 @@ namespace Feature.EnemyComboLogic
             return transform.position.y <= yLevel;
         }
     }
-    public class EnemyDamageReactor : IDamageable
+    public class EnemyDamageReactor : MonoBehaviour, IDamageable
     {
         private Rigidbody rigidbody;
         private IGroundChecker groundChecker;
-        public EnemyDamageReactor(Rigidbody rigidbody, IGroundChecker groundChecker)
+        private float verticalVelocity;
+        [Inject]
+        private void Construct(Rigidbody rigidbody, IGroundChecker groundChecker, float velocity)
         {
             this.rigidbody = rigidbody;
             this.groundChecker = groundChecker;
+            verticalVelocity = velocity;
         }
 
         public void TakeDamage(AttackData attackData)
@@ -44,7 +47,7 @@ namespace Feature.EnemyComboLogic
                 bool yElevationSaver = false;
                 if (groundChecker.IsOnGround())
                 {
-                    direction.y += 2;
+                    direction.y += verticalVelocity;
                 }
                 else
                 {

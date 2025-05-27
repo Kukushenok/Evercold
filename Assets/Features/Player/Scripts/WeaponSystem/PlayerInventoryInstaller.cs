@@ -19,7 +19,7 @@ namespace Feature.Player.WeaponManager
         }
         [SerializeField] private Transform weaponViewParentTransform;
         [SerializeField] private List<BasicWeaponScriptableObject> initWeapons;
-        [SerializeField] private List<RemovalWeaponScriptableObject> removalWeapons;
+        [SerializeField] private List<AimedWeaponScriptableObject> removalWeapons;
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<PlayerWeaponInventory>().AsSingle().NonLazy();

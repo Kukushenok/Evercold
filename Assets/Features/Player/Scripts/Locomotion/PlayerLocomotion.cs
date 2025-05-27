@@ -7,6 +7,7 @@ namespace Feature.Player
 {
     public interface IPlayerLocomotion
     {
+        public Vector3 CameraForwardVec { get; }
         public Vector3 CameraPosition {get; set;}
         public Vector3 CameraRotation { get; set; } // eulerAngles
         public Vector3 PlayerPosition {get; set;}
@@ -18,6 +19,7 @@ namespace Feature.Player
 
     public class PlayerLocomotion : IPlayerLocomotion
     {
+        public Vector3 CameraForwardVec => _cameraTransform.forward;
         public Vector3 CameraPosition {
             get => _cameraTransform.position;
             set => _cameraTransform.position = value;
