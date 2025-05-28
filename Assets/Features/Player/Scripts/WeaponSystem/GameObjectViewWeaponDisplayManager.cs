@@ -13,7 +13,7 @@ namespace Feature.Player.WeaponManager
         public void CreateView(IWeapon gm, DiContainer instantiator)
         {
             GameObject g = instantiator.InstantiatePrefab(gm.WeaponInfo.WeaponViewPrefab, transform);
-            instantiator.Bind<IEnableable>().FromMethod(x=>g.GetComponent<IEnableable>()).AsCached();
+            instantiator.Bind<IWeaponView>().FromMethod(x=>g.GetComponent<IWeaponView>()).AsCached();
             g.SetActive(false);
         }
     }

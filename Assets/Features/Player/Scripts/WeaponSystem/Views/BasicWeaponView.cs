@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using Zenject;
 namespace Feature.Player.WeaponManager
 {
-    public class BasicWeaponView : MonoBehaviour, IEnableable, IDisposable
+    public class BasicWeaponView : MonoBehaviour, IWeaponView
     {
         public bool Enabled { get => gameObject.activeSelf; set => gameObject.SetActive(value); }
         public UnityEvent BasicEventBridge;

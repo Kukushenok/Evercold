@@ -18,8 +18,7 @@ namespace Feature.Player.WeaponManager
             }
         }
         [SerializeField] private Transform weaponViewParentTransform;
-        [SerializeField] private List<BasicWeaponScriptableObject> initWeapons;
-        [SerializeField] private List<AimedWeaponScriptableObject> removalWeapons;
+        [SerializeField] private List<BasicWeaponObject> WeaponObjects;
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<PlayerWeaponInventory>().AsSingle().NonLazy();
@@ -27,8 +26,7 @@ namespace Feature.Player.WeaponManager
             Container.BindInterfacesTo<ExamplePlayerInventoryInput>().AsSingle().NonLazy();
             Container.BindInterfacesTo<BasicShootButtonInput>().AsSingle().NonLazy();
             List<IWeapon> weapons = new List<IWeapon>();
-            weapons.AddRange(initWeapons);
-            weapons.AddRange(removalWeapons);
+            weapons.AddRange(WeaponObjects);
             Container.Bind<WeaponAdder>().AsSingle().WithArguments(weapons).NonLazy();
             
         }

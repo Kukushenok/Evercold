@@ -10,11 +10,15 @@ namespace Feature.Player.WeaponManager
     {
 
     }
+    public interface IWeaponView: IEnableable, IDisposable
+    {
+
+    }
     public class ContainerWatcher: IEnableable, ITickable, IFixedTickable, IDisposable, IInitializable
     {
         private DiContainer container;
         private List<IWeaponLogic> weaponLogics = new List<IWeaponLogic>();
-        private List<IEnableable> enableables = new List<IEnableable>();
+        private List<IWeaponView> views = new List<IWeaponView>();
         public ContainerWatcher(DiContainer container)
         {
             this.container = container;
@@ -25,7 +29,7 @@ namespace Feature.Player.WeaponManager
                 {
                     _enabled = value;
                     DoWithResolved(weaponLogics, x => x.Enabled = _enabled);
-                    DoWithResolved(enableables, x => x.Enabled = _enabled);
+                    DoWithResolved(views, x => x.Enabled = _enabled);
                 }
         }
 
@@ -55,6 +59,7 @@ namespace Feature.Player.WeaponManager
         public void Dispose()
         {
             DoWithResolved(weaponLogics, x => x.Dispose());
+            DoWithResolved(views, x => x.Dispose());
             container = null;
 
         }

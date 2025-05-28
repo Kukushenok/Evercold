@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c3f192db5fd98469abc0955bc49807, type: 3}
-  m_Name: AimedWeapon
+  m_Script: {fileID: 11500000, guid: f006a858e840dc143a1b3c8205b0c04d, type: 3}
+  m_Name: Debug
   m_EditorClassIdentifier: 
-  weaponView: {fileID: 957324032175958516, guid: 57120529bae99304bab855b56f126965,
+  weaponView: {fileID: 957324032175958516, guid: 73c78914c6d2e12459eecf43f87927f3,
     type: 3}
-  <splashParticles>k__BackingField: {fileID: 6583517554053036386, guid: 333d9eddfd6ba244087cb0a4360b4590,
+  spawnPrefab: {fileID: 5902865515454623219, guid: 24275f1680962d74a967fd24762ff5f3,
     type: 3}

@@ -1,13 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 namespace Feature.Player.WeaponManager
 {
     [CreateAssetMenu(menuName = "Game/Basic weapon")]
-    public class BasicWeaponScriptableObject : ScriptableObject, IWeapon
+    public class BasicWeaponScriptableObject : SimpleLogicWeaponObject<BasicWeaponScriptableObject.Logic>
     {
-        [field: SerializeField] public WeaponInfo WeaponInfo { get; private set; }
         public class Logic : IWeaponLogic, IWeaponShootCallback
         {
             private IShootButtonInput shootInput;
@@ -43,11 +41,6 @@ namespace Feature.Player.WeaponManager
             {
                 
             }
-        }
-
-        public void Install(DiContainer instantiator)
-        {
-            instantiator.BindInterfacesAndSelfTo<Logic>().AsSingle().NonLazy();
         }
     }
 }

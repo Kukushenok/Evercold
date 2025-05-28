@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-public class AlignedWithPlayerWeaponView : MonoBehaviour, IEnableable, IDisposable
+public class AlignedWithPlayerWeaponView : MonoBehaviour, IWeaponView
 {
     private IPlayerLocomotion locomotion;
     private IWeaponShootCallback weaponShootCallback;

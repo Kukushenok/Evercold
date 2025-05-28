@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fb13d7c6ef12a48853fae0eb042f96, type: 3}
   m_Name: First
   m_EditorClassIdentifier: 
-  <WeaponInfo>k__BackingField:
-    <Identifier>k__BackingField: Sample1
-    <WeaponViewPrefab>k__BackingField: {fileID: 957324032175958516, guid: 73c78914c6d2e12459eecf43f87927f3,
-      type: 3}
+  weaponView: {fileID: 957324032175958516, guid: 73c78914c6d2e12459eecf43f87927f3,
+    type: 3}

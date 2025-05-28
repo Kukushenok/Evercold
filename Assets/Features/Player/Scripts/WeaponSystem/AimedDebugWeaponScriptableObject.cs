@@ -3,10 +3,10 @@ using UnityEngine.Events;
 using Zenject;
 namespace Feature.Player.WeaponManager
 {
-    [CreateAssetMenu(menuName = "Game/Aimed weapon")]
-    public class AimedWeaponScriptableObject : BasicWeaponObject
+    [CreateAssetMenu(menuName = "Game/Debug weapon")]
+    public class AimedDebugWeaponScriptableObject : BasicWeaponObject
     {
-        [field:SerializeField] public GameObject splashParticles { get; private set; }
+        [SerializeField] public GameObject spawnPrefab;
         public class Logic : IWeaponLogic, IWeaponShootCallback
         {
             public bool Enabled { get; set; }
@@ -45,18 +45,10 @@ namespace Feature.Player.WeaponManager
                 //Quaternion eulers = Quaternion.Euler(locomotion.CameraRotation) * Quaternion.Euler(locomotion.PlayerRotation);
                 //Vector3 d = eulers * Vector3.forward;
                 Ray rd = new Ray(locomotion.CameraGlobalPosition, locomotion.CameraForwardVec);
-                RaycastHit[] ht = Physics.SphereCastAll(rd, 0.8f, 1.8f);
-                foreach (RaycastHit info in ht)
+                if (Physics.SphereCast(rd, 0.5f, out RaycastHit info, 100.0f))
                 {
-                    if (info.collider.name == "Player") continue; // SHIT CODING
-                    if(info.collider != null && info.collider.TryGetComponent(out IDamageable dmg))
-                    {
-                        dmg.TakeDamage(new AttackData(10, null, locomotion.CameraForwardVec * 6));
-                        locomotion.Velocity += new Vector3(0, 1, 0);
-                    }
                     GameObject gm = instantiator.InstantiatePrefab(bullet);
                     gm.transform.position = info.point;
-                    Destroy(gm, 5);
                 }
 
             }
@@ -73,7 +65,7 @@ namespace Feature.Player.WeaponManager
         }
         public override void Install(DiContainer instantiator)
         {
-            instantiator.BindInterfacesAndSelfTo<Logic>().AsSingle().WithArguments(splashParticles);
+            instantiator.BindInterfacesAndSelfTo<Logic>().AsSingle().WithArguments(spawnPrefab);
         }
     }
 }
