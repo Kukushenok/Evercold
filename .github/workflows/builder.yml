@@ -11,6 +11,8 @@ name: CI
 # 
 # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#onpushpull_requestpaths
 on:
+  pull_request:
+    types: [opened, reopened]
   push:
     branches:
       - develop
