@@ -5,10 +5,10 @@ using UnityEngine;
 public class AttackData
 {
     public float Damage {private set; get;}
-    GameObject? AssociatedOwner;
-    Vector3? AssociatedKnockback;
+    public GameObject? AssociatedOwner { private set; get; }
+    public Vector3? AssociatedKnockback { private set; get; }
 
-    
+
 
     // public AttackData(float damage) => Damage = damage;
     public AttackData(float damage, GameObject? associatedOwner, Vector3? associatedKnockback){

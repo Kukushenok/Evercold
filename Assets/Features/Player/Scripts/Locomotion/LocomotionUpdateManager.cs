@@ -4,32 +4,37 @@ using Feature.Player;
 using UnityEngine;
 using Zenject;
 
-public class LocomotionUpdateManager : ITickable, IFixedTickable
+namespace Feature.Player
 {
-    List<ILocomotionFeature> _features;
-
-    
-    ILocomotionData _data;
-
-    [Inject]
-    public LocomotionUpdateManager(List<ILocomotionFeature> features, ILocomotionData data){
-        _features = features;
-        _data = data;
-    }
-
-    public void Tick()
+    public class LocomotionUpdateManager : ITickable, IFixedTickable
     {
-        foreach (var _feature in _features)
-            {
-                _feature.OnUpdate(_data);
-            }
-    }
+        private List<ILocomotionFeature> _features;
 
-    public void FixedTick()
-    {
-        foreach (var _feature in _features)
+        IPlayerLocomotion _locomotion;
+
+        [Inject]
+        public LocomotionUpdateManager(List<ILocomotionFeature> features, IPlayerLocomotion locomotion)
+        {
+            _features = features;
+            _locomotion = locomotion;
+        }
+
+        public void Tick()
+        {
+            foreach (var _feature in _features)
             {
-                _feature.OnFixedUpdate(_data);
+                _feature.OnUpdate(_locomotion);
             }
+            _locomotion.Update();
+        }
+
+        public void FixedTick()
+        {
+            foreach (var _feature in _features)
+            {
+                _feature.OnFixedUpdate(_locomotion);
+            }
+            _locomotion.FixedUpdate();
+        }
     }
 }

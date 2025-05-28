@@ -1,0 +1,17 @@
+{
+    "name": "PlayerFacade",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0a414c9e2fbc14543bea58ca09e3bebb",
+        "GUID:b2e031c4e537d4949a3e48cd34b69f7f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
