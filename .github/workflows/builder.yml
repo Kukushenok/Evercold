@@ -4,7 +4,7 @@
 
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Build And Push To Itch
 
 # manually 
 # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
@@ -36,12 +36,11 @@ jobs:
     strategy:
       # fail-fast: false
       matrix:
-        targetPlatform:
-          - WebGL
-          # - StandaloneLinux64
-          - StandaloneWindows64
-          #- StandaloneWindows
-          #- StandaloneOSX
+        include:
+        - targetPlatform: StandaloneWindows64
+          butlerChannel: windows
+        - targetPlatform: WebGL
+          butlerChannel: html5
 
     # Map a step output to a job output
     outputs:
@@ -129,64 +128,11 @@ jobs:
           tree ${{ env.BUILD_OUTPUT_PATH }}
 
       # Output
-      - name: Archive
+      - name: Archive (IT HOLDS THE LINK FOR THE .ZIP BUILD)
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BUILD_ARTIFACT_NAME }}
           path: ${{ env.BUILD_OUTPUT_PATH }}/${{ matrix.targetPlatform }}
-
-  butler_push:
-    name: Push to Itch.io
-    needs: [unity_build]
-    runs-on: ubuntu-latest
-    strategy:
-      # fail-fast: false
-      matrix:
-        targetPlatform:
-          - WebGL
-          # - StandaloneLinux64
-          - StandaloneWindows64
-          # - StandaloneWindows
-          # - StandaloneOSX
-        butlerChannel:
-          - html5
-          - windows
-
-    steps:
-      - name: Download Build
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ needs.unity_build.outputs.buildArtifact }}
-          path: ${{ env.BUILD_OUTPUT_PATH }}/${{ matrix.targetPlatform }}
-      
-      ## manual butler setup [alternative]
-
-      # - name: Butler download
-      #   run: |
-      #     # -L follows redirects
-      #     # -O specifies output name
-      #     # -s hides all errors and the progress bar
-      #     # -S tells curl to be silent, except when there is an error
-      #     curl -S -s -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
-
-      # - name: Butler Unzip
-      #   run: unzip butler.zip -d ${{ env.BUTLER_PATH }}
-
-      # - name: Make Butler executable
-      #   # GNU unzip tends to not set the executable bit even though it's set in the .zip
-      #   # mark extracted file as executable
-      #   run: chmod +x ${{ env.BUTLER_PATH }}/butler
-
-      # - name: Butler test run
-      #   # just a sanity check run (and also helpful in case you're sharing CI logs)
-      #   run: ${{ env.BUTLER_PATH }}/butler -V
-
-      # - name: Butler login
-      #   # just a sanity check run (and also helpful in case you're sharing CI logs)
-      #   run: ${{ env.BUTLER_PATH }}/butler login
-
-      # - name: Directory content after Butler Download
-      #   run: tree
 
       - name: Butler Push
         uses: josephbmanley/butler-publish-itchio-action@master
@@ -196,5 +142,3 @@ jobs:
           ITCH_GAME: ${{ env.ITCHIO_GAME }}
           ITCH_USER: ${{ env.ITCHIO_USER }}
           PACKAGE: build/${{ matrix.targetPlatform }}
-
-      # TODO - Create release https://github.com/marketplace/actions/upload-a-release-asset
