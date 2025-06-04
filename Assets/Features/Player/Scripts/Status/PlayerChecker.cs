@@ -67,7 +67,7 @@ namespace Feature.Player
             if (Physics.CheckCapsule(
                 transform.position,
                 transform.position + transform.TransformDirection(_config.LeftWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
-                _config.WallCheckFigureShiftDistance,
+                _config.WallCheckFigureSize,
                 _config.WallLayerMask)) return true;
             return false;
         }

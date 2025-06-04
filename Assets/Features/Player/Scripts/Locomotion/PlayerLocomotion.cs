@@ -59,7 +59,10 @@ namespace Feature.Player
 
         public void FixedUpdate() {
             _controller.Move(Velocity * Time.fixedDeltaTime);
-            Velocity = new Vector3(Mathf.Lerp(Velocity.x, 0, _config.MovementDrag * Time.fixedDeltaTime), Velocity.y, Mathf.Lerp(Velocity.z, 0, _config.MovementDrag * Time.fixedDeltaTime));
+            float drag = _config.MovementDrag;
+            if (Status.IsJumping) drag = _config.JumpMovementDrag;
+
+            Velocity = new Vector3(Mathf.Lerp(Velocity.x, 0, drag * Time.fixedDeltaTime), Velocity.y, Mathf.Lerp(Velocity.z, 0, drag * Time.fixedDeltaTime));
         }
     }
 }

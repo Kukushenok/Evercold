@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestPlayerConfig
   m_EditorClassIdentifier: Player:Feature.Player:MineConfig
   <Gravity>k__BackingField: -9.8
-  <CoyoteTime>k__BackingField: 0.1
+  <CoyoteTime>k__BackingField: 1
   <PlayerJumpType>k__BackingField: 0
   <JumpHeight>k__BackingField: 1
   <MaxJumps>k__BackingField: 2

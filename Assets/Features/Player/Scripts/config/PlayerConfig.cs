@@ -22,12 +22,14 @@ namespace Feature.Player
         [field: SerializeField, Tooltip("(sorry for bad Inglish) Shows jump trajectory, after t=1 player may be still falling so you need to expand curve further")]
         public AnimationCurve JumpCurve { get; private set; }
         [field: SerializeField, Tooltip("This value is used with jump curve")] public float JumpDuration { get; private set; }
+        [field: SerializeField] public float WallJumpUpForce = 10f;
+        [field: SerializeField] public float WallJumpSideForce = 10f;
         [field: SerializeField, Header("Jump Additional Params"), Tooltip("if vertical velocity is higher than this value, player is considered jumping")]
         public float LowestJumpingVelocity { get; private set; } = 0.1f;
         [field: SerializeField, Tooltip("if vertical velocity is lower than this value, player is considered falling")]
         public float HighestFallingVelocity { get; private set; } = 0.1f;
         [field: SerializeField, Header("SlideParams"), Tooltip("This value added to player velocity when sliding")]
-        
+
         public float SlideLength { get; private set; } = 10f;
         public enum SlideType
         {
@@ -47,7 +49,7 @@ namespace Feature.Player
         [field: SerializeField] public float DashDuration { get; private set; } = 10f;
         [field: SerializeField] public int MaxDashAmount { get; private set; } = 3;
 
-        
+
         public enum SlamType
         {
             SpeedAndAcceleration, // todo
@@ -62,6 +64,7 @@ namespace Feature.Player
         [field: SerializeField] public float SlamRayCheckerRadius { get; private set; } = 0.1f;
         [field: SerializeField, Space, Header("Move Params")] public float MovementSpeed { get; private set; }
         [field: SerializeField] public float MovementDrag { get; private set; } = 1f;
+        [field: SerializeField] public float JumpMovementDrag { get; private set; } = 0.1f;
         [field: SerializeField, Range(0, 1)] public float AirControlMultiplyer { get; private set; } = 1f;
         [field: SerializeField, Space, Header("Camera Params")] public float MouseSensitivity { get; private set; }
         [field: SerializeField, Space, Header("Wall Check Params"), Tooltip("example: colliding sphere radius")]

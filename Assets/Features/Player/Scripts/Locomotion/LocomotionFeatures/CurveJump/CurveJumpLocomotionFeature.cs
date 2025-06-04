@@ -30,6 +30,7 @@ namespace Feature.Player
         public void OnFixedUpdate(IPlayerLocomotion loc)
         {
             if (loc.Status.IsDashing) { loc.Status.IsJumping = false; }
+            if (loc.Status.IsSlamming) { loc.Status.IsJumping = false; }
             if (loc.Status.IsJumping)
             {
                 _jumpTimer += Time.fixedDeltaTime / _config.JumpDuration;
@@ -71,8 +72,12 @@ namespace Feature.Player
             if (_movementInput.IsJumping() && _wallChecker.IsCollidingWithWalls())
             {
                 //loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpHeight * -_config.Gravity, loc.Velocity.z);
+
                 loc.Status.IsJumping = true;
                 _jumpTimer = 0f;
+                Quaternion rotation = Quaternion.Euler(0, loc.PlayerRotation.y, 0);
+                if (_wallChecker.IsCollidingWithLeftWall()) { loc.Velocity = loc.Velocity + rotation * Vector3.right * _config.WallJumpSideForce; }
+                else if (_wallChecker.IsCollidingWithRightWall()) { loc.Velocity = loc.Velocity + rotation * Vector3.left * _config.WallJumpSideForce; }
             }
         }
 
