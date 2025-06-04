@@ -16,14 +16,15 @@ namespace Feature.Player
             Curve
         }
         [field: SerializeField] public JumpType PlayerJumpType { get; private set; } = JumpType.Normal;
-        [field: SerializeField] public float JumpHeight { get; private set; } = 0f; // TODO: Make it really jump height, not jump force
-        //[field: SerializeField] public CharacterControllerLocomotion.JumpSettings LocomotionSettings {get; private set;}
         [field: SerializeField] public int MaxJumps { get; private set; } = 2;
+        [ field: SerializeField, Header("Normal Jump Params")] public float JumpForce { get; private set; } = 10f;
+        [field: SerializeField, Header("Curve Jump Params")] public float JumpHeight { get; private set; } = 0f; 
+        //[field: SerializeField] public CharacterControllerLocomotion.JumpSettings LocomotionSettings {get; private set;}
+        
         [field: SerializeField, Tooltip("(sorry for bad Inglish) Shows jump trajectory, after t=1 player may be still falling so you need to expand curve further")]
         public AnimationCurve JumpCurve { get; private set; }
         [field: SerializeField, Tooltip("This value is used with jump curve")] public float JumpDuration { get; private set; }
-        [field: SerializeField] public float WallJumpUpForce = 10f;
-        [field: SerializeField] public float WallJumpSideForce = 10f;
+        [field: SerializeField, Header("Wall Jump Params")] public float WallJumpSideForce = 10f;
         [field: SerializeField, Header("Jump Additional Params"), Tooltip("if vertical velocity is higher than this value, player is considered jumping")]
         public float LowestJumpingVelocity { get; private set; } = 0.1f;
         [field: SerializeField, Tooltip("if vertical velocity is lower than this value, player is considered falling")]
@@ -34,15 +35,17 @@ namespace Feature.Player
         public enum SlideType
         {
             Addition,
-            Multiply, // todo
-            Curved // todo
+            Multiply
+            //Curved // todo
         }
         [field: SerializeField] public SlideType PlayerSlideType { get; private set; } = SlideType.Addition;
-        [field: SerializeField] public AnimationCurve SlideCurve { get; private set; }
+        //[field: SerializeField] public AnimationCurve SlideCurve { get; private set; }
         [field: SerializeField] public Vector3 SlideDirection { get; private set; } = Vector3.forward; // todo readonly
-        [field: SerializeField] public float SlideDuration = 1f;
+        // [field: SerializeField] public float SlideDuration = 1f;
         [field: SerializeField] public Vector3 CameraSlideLocalPosition { get; private set; } = new Vector3(0f, -1f, 0f);
         [field: SerializeField] public Vector3 CameraDefaultLocalPosition { get; private set; } = new Vector3(0f, 0.658f, 0f);
+        [field: SerializeField] public float DefaultColliderHeight { get; private set; } = 2f;
+        [field: SerializeField] public float SlideColliderHeight { get; private set; } = 1f;
 
         [field: SerializeField, Header("Dash Params")]
         public float DashSpeed { get; private set; } = 1f;
@@ -52,19 +55,19 @@ namespace Feature.Player
 
         public enum SlamType
         {
-            SpeedAndAcceleration, // todo
-            Curve // todo
+            SpeedAndAcceleration // todo
+            //Curve // todo
         }
         [field: SerializeField, Header("Slam Params")]
         public SlamType PlayerSlamType { get; private set; } = SlamType.SpeedAndAcceleration;
-        [field: SerializeField] public AnimationCurve SlamCurve;
+        // [field: SerializeField] public AnimationCurve SlamCurve;
         [field: SerializeField] public float SlamStartSpeed { get; private set; } = 1f;
         [field: SerializeField] public float SlamAcceleration { get; private set; } = 1f;
         [field: SerializeField] public float SlamRayCheckerHeight { get; private set; } = 3f;
         [field: SerializeField] public float SlamRayCheckerRadius { get; private set; } = 0.1f;
         [field: SerializeField, Space, Header("Move Params")] public float MovementSpeed { get; private set; }
         [field: SerializeField] public float MovementDrag { get; private set; } = 1f;
-        [field: SerializeField] public float JumpMovementDrag { get; private set; } = 0.1f;
+        [field: SerializeField] public float AirMovementDrag { get; private set; } = 0.1f;
         [field: SerializeField, Range(0, 1)] public float AirControlMultiplyer { get; private set; } = 1f;
         [field: SerializeField, Space, Header("Camera Params")] public float MouseSensitivity { get; private set; }
         [field: SerializeField, Space, Header("Wall Check Params"), Tooltip("example: colliding sphere radius")]

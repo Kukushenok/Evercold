@@ -17,7 +17,7 @@ namespace Feature.Player
         }
         public void OnFixedUpdate(IPlayerLocomotion loc)
         {
-            if (loc.Status.IsSliding) { return; }
+            if (loc.Status.IsSliding || loc.Status.IsDashing) { return; }
 
             Vector3 move = Vector3.right * _movementInput.GetHorizontalMovement()
                 + Vector3.forward * _movementInput.GetVerticalMovement();

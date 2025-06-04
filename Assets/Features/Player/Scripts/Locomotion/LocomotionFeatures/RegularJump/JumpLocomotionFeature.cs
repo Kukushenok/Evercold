@@ -57,14 +57,14 @@ namespace Feature.Player
             if (_movementInput.IsJumping() && _jumpsLeft > 0)
             {
                 _coyoteTimer = 0;
-                loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpHeight * -_config.Gravity, loc.Velocity.z);
+                loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpForce * -_config.Gravity, loc.Velocity.z);
                 _jumpsLeft -= 1;
                 loc.Status.IsJumping = true;
             }
             if (_movementInput.IsJumping() && _wallChecker.IsCollidingWithWalls() && !_groundChecker.IsOnGround())
             {
                 _coyoteTimer = 0;
-                loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpHeight * -_config.Gravity, loc.Velocity.z);
+                loc.Velocity = new Vector3(loc.Velocity.x, _config.JumpForce * -_config.Gravity, loc.Velocity.z);
                 loc.Status.IsJumping = true;
                 if (_wallChecker.IsCollidingWithLeftWall()) { loc.Velocity = loc.Velocity + Vector3.right * _config.WallJumpSideForce; }
                 if (_wallChecker.IsCollidingWithRightWall()) { loc.Velocity = loc.Velocity + Vector3.left * _config.WallJumpSideForce; }

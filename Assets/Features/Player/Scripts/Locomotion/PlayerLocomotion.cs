@@ -19,20 +19,24 @@ namespace Feature.Player
 
     public class PlayerLocomotion : IPlayerLocomotion
     {
-        public IPlayerLocomotionStatus Status {get; private set;}
-        public Vector3 CameraPosition {
+        public IPlayerLocomotionStatus Status { get; private set; }
+        public Vector3 CameraPosition
+        {
             get => _cameraTransform.localPosition;
             set => _cameraTransform.localPosition = value;
         }
-        public Vector3 CameraRotation {
+        public Vector3 CameraRotation
+        {
             get => _cameraTransform.localRotation.eulerAngles;
             set => _cameraTransform.localRotation = Quaternion.Euler(value);
-            }
-        public Vector3 PlayerPosition {
+        }
+        public Vector3 PlayerPosition
+        {
             get => _playerTransform.position;
             set => _playerTransform.position = value;
         }
-        public Vector3 PlayerRotation {
+        public Vector3 PlayerRotation
+        {
             get => _playerTransform.localRotation.eulerAngles;
             set => _playerTransform.localRotation = Quaternion.Euler(value);
         }
@@ -44,26 +48,26 @@ namespace Feature.Player
 
         public PlayerLocomotion(
             Transform playerTransform,
-            Transform cameraTransform, 
-            CharacterController controller, 
-            PlayerConfig config, 
+            Transform cameraTransform,
+            CharacterController controller,
+            PlayerConfig config,
             IPlayerLocomotionStatus status)
         {
             _cameraTransform = cameraTransform;
             _playerTransform = playerTransform;
             _controller = controller;
             Velocity = Vector3.zero;
-            _config = config; 
+            _config = config;
             Status = status;
         }
 
-        public void FixedUpdate() {
+        public void FixedUpdate()
+        {
             _controller.Move(Velocity * Time.fixedDeltaTime);
             float drag = _config.MovementDrag;
-            if (Status.IsJumping) drag = _config.JumpMovementDrag;
-
+            if (Status.IsJumping) drag = _config.AirMovementDrag;
             Velocity = new Vector3(Mathf.Lerp(Velocity.x, 0, drag * Time.fixedDeltaTime), Velocity.y, Mathf.Lerp(Velocity.z, 0, drag * Time.fixedDeltaTime));
-        }
+        }   
     }
 }
 
