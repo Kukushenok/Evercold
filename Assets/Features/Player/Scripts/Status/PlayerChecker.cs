@@ -23,7 +23,12 @@ namespace Feature.Player
         bool IsEnoughHeight();
     }
 
-    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker, IPlayerSlamHeightChecker
+    public interface IPlayerCeilingChecker
+    {
+        bool IsCollidingWithCeiling();
+    }
+
+    public class PlayerChecker : MonoBehaviour, IPlayerGroundChecker, IPlayerWallChecker, IPlayerSlamHeightChecker, IPlayerCeilingChecker
     {
         private PlayerConfig _config;
         [Inject]
@@ -59,6 +64,15 @@ namespace Feature.Player
                 _config.WallCheckFigureSize,
                 _config.WallLayerMask)) return true;
 
+            return false;
+        }
+        public bool IsCollidingWithCeiling()
+        {
+            if (Physics.CheckCapsule(
+                transform.position,
+                transform.position + transform.up* _config.CeilingCheckFigureDistance,
+                _config.CeilingCheckFigureSize,
+                _config.CeilingLayerMask)) return true;
             return false;
         }
 
@@ -99,6 +113,13 @@ namespace Feature.Player
                     transform.position,
                     transform.position + transform.TransformDirection(_config.LeftWallCheckDirection).normalized * _config.WallCheckFigureShiftDistance,
                     _config.WallCheckFigureSize
+                );
+            }
+            if (_config.ShowCeilingCheckGizmos){
+                DrawCapsuleGizmo(
+                    transform.position,
+                    transform.position + transform.up * _config.CeilingCheckFigureDistance,
+                    _config.CeilingCheckFigureSize
                 );
             }
         }

@@ -29,7 +29,9 @@ namespace Feature.Player
         public float LowestJumpingVelocity { get; private set; } = 0.1f;
         [field: SerializeField, Tooltip("if vertical velocity is lower than this value, player is considered falling")]
         public float HighestFallingVelocity { get; private set; } = 0.1f;
+        [field: SerializeField, Range(0, 1)] public float CeilingBounciness { get; private set; } = 0.5f;
         [field: SerializeField, Header("SlideParams"), Tooltip("This value added to player velocity when sliding")]
+        
 
         public float SlideLength { get; private set; } = 10f;
         public enum SlideType
@@ -84,9 +86,13 @@ namespace Feature.Player
         public float GroundCheckFigureSize { get; private set; } = 1f;
         [field: SerializeField] public float GroundCheckFigureShiftDistance { get; private set; } = 1f;
         [field: SerializeField] public LayerMask GroundLayerMask { get; private set; }
-
+        
+        [field: SerializeField, Header("Ceiling Check Params")] public float CeilingCheckFigureDistance { get; private set; } = 0.75f;
+        [field: SerializeField] public float CeilingCheckFigureSize { get; private set; } = 1f;
+        [field: SerializeField] public LayerMask CeilingLayerMask { get; private set; }
         [field: SerializeField, Space, Header("Debug Params")]
         public bool ShowGroundCheckGizmos { get; private set; } = false;
+        [field: SerializeField] public bool ShowCeilingCheckGizmos { get; private set; } = false;
         [field: SerializeField] public bool ShowWallCheckGizmos { get; private set; } = false;
 
 

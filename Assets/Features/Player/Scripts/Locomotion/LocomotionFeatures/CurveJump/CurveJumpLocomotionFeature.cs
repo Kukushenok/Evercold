@@ -12,17 +12,19 @@ namespace Feature.Player
 
         private IPlayerGroundChecker _groundChecker;
         private IPlayerWallChecker _wallChecker;
+        private IPlayerCeilingChecker _ceilingChecker;
         private int _jumpsLeft = 2;
         private float _jumpTimer = 0f;
         private float _maxTime = 0f;
 
-        public CurveJumpLocomotionFeature(PlayerConfig config, IMovementInput movementInput, IPlayerGroundChecker groundChecker, IPlayerWallChecker wallChecker)
+        public CurveJumpLocomotionFeature(PlayerConfig config, IMovementInput movementInput, IPlayerGroundChecker groundChecker, IPlayerWallChecker wallChecker, IPlayerCeilingChecker ceilingChecker)
         {
             _config = config;
             _movementInput = movementInput;
             _jumpsLeft = _config.MaxJumps;
             _groundChecker = groundChecker;
             _wallChecker = wallChecker;
+            _ceilingChecker = ceilingChecker;
 
             _maxTime = _config.JumpCurve.keys[_config.JumpCurve.length - 1].time - 0.05f; // do not include last values to avoid errors
         }
@@ -31,6 +33,11 @@ namespace Feature.Player
         {
             if (loc.Status.IsDashing) { loc.Status.IsJumping = false; }
             if (loc.Status.IsSlamming) { loc.Status.IsJumping = false; }
+            if (_ceilingChecker.IsCollidingWithCeiling())
+            {
+                loc.Status.IsJumping = false;
+            loc.Velocity = new Vector3(loc.Velocity.x, -loc.Velocity.y * _config.CeilingBounciness, loc.Velocity.z);  }
+            
             if (loc.Status.IsJumping)
             {
                 _jumpTimer += Time.fixedDeltaTime / _config.JumpDuration;

@@ -64,6 +64,7 @@ MonoBehaviour:
   WallJumpSideForce: 20
   <LowestJumpingVelocity>k__BackingField: 0.1
   <HighestFallingVelocity>k__BackingField: 0.1
+  <CeilingBounciness>k__BackingField: 0.06
   <SlideLength>k__BackingField: 10
   <PlayerSlideType>k__BackingField: 1
   <SlideDirection>k__BackingField: {x: 0, y: 0, z: 1}
@@ -96,5 +97,11 @@ MonoBehaviour:
   <GroundLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 3
+  <CeilingCheckFigureDistance>k__BackingField: 0.75
+  <CeilingCheckFigureSize>k__BackingField: 0.33
+  <CeilingLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 3
   <ShowGroundCheckGizmos>k__BackingField: 1
+  <ShowCeilingCheckGizmos>k__BackingField: 1
   <ShowWallCheckGizmos>k__BackingField: 1

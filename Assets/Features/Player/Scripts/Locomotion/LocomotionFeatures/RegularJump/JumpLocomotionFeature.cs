@@ -15,14 +15,16 @@ namespace Feature.Player
         private IPlayerGroundChecker _groundChecker;
         private IPlayerWallChecker _wallChecker;
         private float _coyoteTimer = 0f;
+        private IPlayerCeilingChecker _ceilingChecker;
 
-        public JumpLocomotionFeature(PlayerConfig config, IMovementInput movementInput, IPlayerGroundChecker groundChecker, IPlayerWallChecker wallChecker)
+        public JumpLocomotionFeature(PlayerConfig config, IMovementInput movementInput, IPlayerGroundChecker groundChecker, IPlayerWallChecker wallChecker, IPlayerCeilingChecker ceilingChecker)
         {
             _config = config;
             _movementInput = movementInput;
             _jumpsLeft = _config.MaxJumps;
             _groundChecker = groundChecker;
             _wallChecker = wallChecker;
+            _ceilingChecker = ceilingChecker;
         }
 
         public void OnFixedUpdate(IPlayerLocomotion loc)
@@ -30,6 +32,14 @@ namespace Feature.Player
             //if (_wallChecker.IsCollidingWithWalls()){
             //    _jumpsLeft = 1;
             //}
+            if (loc.Status.IsDashing) { loc.Status.IsJumping = false; }
+            if (loc.Status.IsSlamming) { loc.Status.IsJumping = false; }
+            if (_ceilingChecker.IsCollidingWithCeiling())
+            {
+                loc.Status.IsJumping = false;
+            loc.Velocity = new Vector3(loc.Velocity.x, -loc.Velocity.y * _config.CeilingBounciness, loc.Velocity.z);  }
+
+            
             if (loc.Velocity.y <= _config.LowestJumpingVelocity && _groundChecker.IsOnGround())
             { // don't use HighestFallingVelocity here we need to include grounded state
                 _jumpsLeft = _config.MaxJumps;
